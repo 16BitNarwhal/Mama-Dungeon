@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Menu
+comment0.text=\r\n\ Title\ screen\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=Menu()
+comment1.text=\r\n\ Construct\ main\ menu\ \r\n
+comment2.params=
+comment2.target=void\ setBG()
+comment2.text=\r\n\ Creates\ a\ background\ filled\ with\ wall\ tiles\r\n
+comment3.params=
+comment3.target=void\ setGUI()
+comment3.text=\r\n\ Initializes\ all\ the\ menu\ GUIs\r\n
+numComments=4

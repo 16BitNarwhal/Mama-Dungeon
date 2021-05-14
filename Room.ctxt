@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Room
+comment0.text=\r\n\ A\ room\ in\ the\ entire\ world\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=Room()
+comment1.text=\r\n\ Construct\ room\r\n
+comment2.params=
+comment2.target=void\ setFloor()
+comment2.text=\r\n\ Lay\ down\ structural\ tiles\ (floor\ and\ wall)\r\n
+comment3.params=
+comment3.target=void\ setWalls()
+comment4.params=
+comment4.target=int\ getID()
+comment4.text=\r\n\ Getters\r\n
+numComments=5

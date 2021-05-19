@@ -10,7 +10,7 @@ public class FloorTile extends Tile {
     
     public FloorTile() {
         // 8 types of floor tiles, may add them with random function
-        GreenfootImage image = new GreenfootImage("dungeon/floor_1.png");
+        GreenfootImage image = new GreenfootImage(imgpath + "floor_1.png");
         image.scale(image.getWidth()*2, image.getHeight()*2);
         setImage(image);
         

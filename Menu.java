@@ -15,6 +15,8 @@ public class Menu extends World {
         super(Utils.worldWidth, Utils.worldHeight, 1);
         setBG();
         setGUI();
+        // reset rooms
+        Room.getRooms().clear();
 
     }
     
@@ -24,7 +26,7 @@ public class Menu extends World {
     private void setBG() {
         for (int x = 0;x <= Utils.worldWidth;x += Utils.tileSize) {
             for (int y = 0;y <= Utils.worldWidth;y += Utils.tileSize) {
-                WallTile wallTile = new WallTile("top");
+                WallTile wallTile = new WallTile();
                 addObject(wallTile, x, y);
             }
         }

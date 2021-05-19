@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=Vector2
+comment0.text=\r\n\ 2D\ Vector\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=Vector2()
+comment2.params=x\ y
+comment2.target=Vector2(float,\ float)
+comment3.params=
+comment3.target=float\ getX()
+comment4.params=
+comment4.target=float\ getY()
+comment5.params=x
+comment5.target=void\ setX(float)
+comment6.params=y
+comment6.target=void\ setY(float)
+comment7.params=
+comment7.target=Vector2\ get()
+numComments=8

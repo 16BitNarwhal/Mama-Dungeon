@@ -8,31 +8,34 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Door extends Environment {
     
-    private Room target;
+    private Room room, target;
     private String type;
     
-    
-    public Door(Room target, String type) {
+    public Door(Room room, Room target, String type) {
+        this.room = room;
         this.target = target;
         this.type = type;
         GreenfootImage image = new GreenfootImage("null.png");
         if (type=="left") {
             image = new GreenfootImage(Tile.imgpath + "entrance_left.png");
         } else if (type=="right") {
-           
-        } else if (type=="top") {
-            
-        } else if (type=="bottom") {
-            
+            image = new GreenfootImage(Tile.imgpath + "entrance_left.png");
+            image.mirrorHorizontally();
+        } else if (type=="up") {
+            image = new GreenfootImage(Tile.imgpath + "entrance_top.png");
+        } else if (type=="down") {
+            image = new GreenfootImage(Tile.imgpath + "entrance_bottom.png");
         }
         image.scale(image.getWidth()*2, image.getHeight()*2);
         setImage(image);
     }
     
-    public void act() { 
+    public void act() {
         Actor player = getOneIntersectingObject(Player.class);
         
         if (player != null) {
+            target.getPlayer().setStats(room.getPlayer());
+            target.getPlayer().setRoomLocation(type);
             Greenfoot.setWorld(target);
         }
     }

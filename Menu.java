@@ -17,7 +17,7 @@ public class Menu extends World {
         setGUI();
         // reset rooms
         Room.getRooms().clear();
-
+        Room.cnt = 0; // debug
     }
     
     /*

@@ -1,5 +1,4 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.ArrayList;
 
 /**
  * Player script
@@ -7,64 +6,65 @@ import java.util.ArrayList;
  * @author Eric Zhang
  * @version (a version number or a date)
  */
-public class Player extends Actor { 
-    private float atkDmg, health;
-    private int movespeed;
-    private int dir; // 1 for left, 0 for right (direction)
-
-    private String imgpath = "player/"; 
-    private int frame = 0;
-    private String state, prevState;
-    private ArrayList<GreenfootImage>[] idleAnim, runAnim;
+public class Player extends Entity {      
     
     /*
      * Player constructors
      */
-    public Player() {
-        state = "idle";
-        prevState = state;
-        movespeed = 2;
+    public Player(Room room) {
+        this(room, 3, 10, 2, new Vector2(Utils.worldWidth/2, Utils.worldHeight/2));
+    }
+    
+    public Player(Room room, float atkDmg, float health, int movespeed, Vector2 pos) {
+        super(room, atkDmg, health, movespeed, pos);
         
+        this.imgpath = "player/";       
         initIdleAnim();
         initRunAnim();
     }
     
-    public void act() {
+    public void act() {     
+        Utils.locate(this);
+        
         move();
         animate();
-        
     }    
     
     /*
      * Player movement + key handling
      */
-    public void move() {
+    private void move() {
         boolean up = Greenfoot.isKeyDown("w");
         boolean down = Greenfoot.isKeyDown("s");
         boolean left = Greenfoot.isKeyDown("a");
         boolean right = Greenfoot.isKeyDown("d");
-        if (up) {
+        
+        // check if player not touching bounds and corresponding key pressed to move
+        if (getY() > room.getUpBound() && up) {
             setLocation(getX(), getY() - movespeed);
         }
-        if (down) {
+        if (getY() < room.getDownBound()-16 && down) {
             setLocation(getX(), getY() + movespeed);
         }
-        if (left) {
+        if (getX() > room.getLeftBound()+8 && left) {
             setLocation(getX() - movespeed, getY());
             dir = 1;
         }
-        if (right) {
+        if (getX() < room.getRightBound()-8 && right) {
             setLocation(getX() + movespeed, getY());
             dir = 0;
-        } 
+        }
         
         if (up || down || left || right) {
             state = "run";
         } else {
             state = "idle";
         }
-    }
+    } 
     
+    /*
+     * Player animate function
+     */
     private void animate() { 
         if (state != prevState) {
             frame = 0;
@@ -86,28 +86,44 @@ public class Player extends Actor {
      * Initialize player animations
      */
     private void initIdleAnim() {
-        idleAnim = new ArrayList[2];
-        idleAnim[0] = new ArrayList<GreenfootImage>(); // face right
-        idleAnim[1] = new ArrayList<GreenfootImage>(); // face left
-        for (int f=0;f<=3;f++) { // go through all 4 frames
-            GreenfootImage img = new GreenfootImage(imgpath+"knight_m_idle_anim_f"+f+".png");
-            img.scale(img.getWidth()*2, img.getHeight()*2);
-            idleAnim[0].add(new GreenfootImage(img)); // create copy of image
-            img.mirrorHorizontally();
-            idleAnim[1].add(img);
-        }
+        super.initIdleAnim("knight_m_idle_anim_f", 4);
     }
     
     private void initRunAnim() {
-        runAnim = new ArrayList[2];
-        runAnim[0] = new ArrayList<GreenfootImage>(); // face right
-        runAnim[1] = new ArrayList<GreenfootImage>(); // face left
-        for (int f=0;f<=3;f++) { // go through all 4 frames
-            GreenfootImage img = new GreenfootImage(imgpath+"knight_m_run_anim_f"+f+".png");
-            img.scale(img.getWidth()*2, img.getHeight()*2);
-            runAnim[0].add(new GreenfootImage(img)); // create copy of image
-            img.mirrorHorizontally();
-            runAnim[1].add(img);
+        super.initRunAnim("knight_m_run_anim_f", 4);
+    }
+    
+    /*
+     * Getters & Setters
+     */
+    public float getAtkDmg() { return this.atkDmg; }
+    public float getHealth() { return this.health; }
+    public int getSpeed() { return this.movespeed; }
+    public int getDir() { return this.dir; }
+    
+    /*
+     * Help transfer player stats from one room to another
+     */ 
+    public void setStats(Player p) {
+        // copy of stats from player p to this
+        this.atkDmg = p.getAtkDmg();
+        this.health = p.getHealth();
+        this.movespeed = p.getSpeed();
+        this.dir = p.getDir(); 
+    }
+    
+    /*
+     * Relocate player after entering a room
+     */
+    public void setRoomLocation(String type) {
+        if (type=="right") {
+            setLocation(93, 194);
+        } else if (type=="left") {
+            setLocation(546, 194);
+        } else if (type=="down") {
+            setLocation(320, 95);
+        } else if (type=="up") {
+            setLocation(320, 314);
         }
     }
 }

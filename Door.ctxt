@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Door
 comment0.text=\r\n\ Create\ a\ door\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=target\ type
-comment1.target=Door(Room,\ java.lang.String)
+comment1.params=room\ target\ type
+comment1.target=Door(Room,\ Room,\ java.lang.String)
 comment2.params=
 comment2.target=void\ act()
 numComments=3

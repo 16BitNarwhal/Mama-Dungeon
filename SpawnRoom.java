@@ -13,7 +13,9 @@ public class SpawnRoom extends Room {
      */
     public SpawnRoom() {
         super();
-        
+        addObject(new MoveHelp(), 170, 280);
+        addObject(new AtkHelp(), 470, 290);
+        setPaintOrder(Player.class, MoveHelp.class, AtkHelp.class);
     } 
     
 }

@@ -9,24 +9,25 @@ import java.util.ArrayList;
  */
 public class Room extends World {
     private static ArrayList<Room> rooms = new ArrayList<Room>(); // all rooms
-    public static int cnt = 0; // debug
+    protected final int maxRad = 4; // max radius (distance of rooms from start)
+    protected int rad; // current distance / radius from start
     
     private Player player;
     private int id; // identity of room
-    private Room leftRoom, rightRoom, upRoom, downRoom; // neighbouring rooms
+    protected Room leftRoom, rightRoom, upRoom, downRoom; // neighbouring rooms
     private int x1, x2, y1, y2; // room boundaries
     
     /**
      * Construct room with no given neighbours
      */ 
-    public Room() {
-        this(null, null, null, null);
+    public Room() { 
+        this(0, null, null, null, null);
     }
     
     /**
      * Construct room with given neighbours
      */
-    public Room(Room left, Room right, Room up, Room down) {
+    public Room(int rad, Room left, Room right, Room up, Room down) {
         super(Utils.worldWidth, Utils.worldHeight, 1);
         // create room bounds based on tile size
         int sz = Utils.tileSize;
@@ -48,6 +49,7 @@ public class Room extends World {
         this.downRoom = down;
         
         // create new rooms & add doors for each neighbour room
+        this.rad = rad;
         initRooms();
         initDoors();
         
@@ -63,23 +65,29 @@ public class Room extends World {
      * Initialize new neighbouring rooms
      */
     private void initRooms() {
-        if (cnt < 1) {
-            cnt++;
-            if (leftRoom==null) {
+        if (rad < maxRad) { // limit distance of farthest room to start
+            // probability of creating a new room on each side
+            float prob = 0.5f - rad/(2f*maxRad);
+            if (leftRoom==null && Utils.random() <= prob) {
                 // right of new room is this
-                leftRoom = new Room(null, this, null, null);
+                leftRoom = new Room(rad+1, null, this, null, null);
             }
-            if (rightRoom==null) {
+            if (rightRoom==null && Utils.random() <= prob) {
                 // left of new room is this
-                rightRoom = new Room(this, null, null, null); 
+                rightRoom = new Room(rad+1, this, null, null, null); 
             }
-            if (upRoom==null) {
+            if (upRoom==null && Utils.random() <= prob) {
                 // down of new room is this
-                upRoom = new Room(null, null, null, this);
+                upRoom = new Room(rad+1, null, null, null, this);
             }
-            if (downRoom==null) {
+            if (downRoom==null && Utils.random() <= prob) {
                 // up of new room is this
-                downRoom = new Room(null, null, this, null);
+                downRoom = new Room(rad+1, null, null, this, null);
+            }
+            // if first room and no neighbour rooms, restart
+            if (id==1 && leftRoom==null && rightRoom==null &&
+                upRoom==null && downRoom==null) {
+                initRooms();
             }
         }
     }
@@ -100,6 +108,7 @@ public class Room extends World {
         if (downRoom != null) {
             addObject(new Door(this, downRoom, "down"), 320, 376);
         }
+    
     }
     
     /*
@@ -140,6 +149,8 @@ public class Room extends World {
     private void addEnemies() { }
     private void addCoins() { }
     
+    public static void resetRooms() { rooms.clear(); }
+    
     /*
      * Getters & setters
      */
@@ -151,17 +162,16 @@ public class Room extends World {
     public int getRightBound() { return this.x2; }
     public int getUpBound() { return this.y1; }
     public int getDownBound() { return this.y2; }
-
+    
     public void setLeftRoom(Room r) { this.leftRoom = r; }
     public void setRightRoom(Room r) { this.rightRoom = r; }
     public void setUpRoom(Room r) { this.upRoom = r; }
     public void setDownRoom(Room r) { this.downRoom = r; }
+    
 }
 
 /* 
- * Todo:
- * Top door, bottom door, room/map generation
- * 
+ * Todo: nuthin for now :D 
  * 
  * Things to/can add:
  * 

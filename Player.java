@@ -6,28 +6,38 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Eric Zhang
  * @version (a version number or a date)
  */
-public class Player extends Entity {      
+public class Player extends Entity {       
     
     /*
      * Player constructors
      */
     public Player(Room room) {
-        this(room, 3, 10, 2, new Vector2(Utils.worldWidth/2, Utils.worldHeight/2));
+        this(room, 3, 100, 2, new Vector2(Utils.worldWidth/2, Utils.worldHeight/2));
+        this.maxHealth = 100;
     }
     
     public Player(Room room, float atkDmg, float health, int movespeed, Vector2 pos) {
-        super(room, atkDmg, health, movespeed, pos);
+        super(room, atkDmg, health, movespeed, pos); 
         
-        this.imgpath = "player/";       
+        this.imgpath = "player/";
         initIdleAnim();
         initRunAnim();
+        
+        PlayerHealthBar healthBg = new PlayerHealthBar(this, "bg");
+        room.addObject(healthBg, 100, 30);
+        
+        PlayerHealthBar healthBar = new PlayerHealthBar(this, "bar");
+        room.addObject(healthBar, 100, 30);
+        healthBar.initBasePos();
     }
     
-    public void act() {     
-        Utils.locate(this);
-        
+    public void act() {
         move();
         animate();
+        
+        health -= 0.05;
+        health = Math.max(health, 0);
+        // System.out.println(Room.getRooms().size());
     }    
     
     /*
@@ -127,3 +137,11 @@ public class Player extends Entity {
         }
     }
 }
+
+/*
+ * Todo:
+ * invincibility when hit by enemy / entering rooms
+ * decrease health when hit by enemy
+ * play hit animation when hit by enemy
+ * 
+ */

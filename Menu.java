@@ -16,8 +16,7 @@ public class Menu extends World {
         setBG();
         setGUI();
         // reset rooms
-        Room.getRooms().clear();
-        Room.cnt = 0; // debug
+        Room.resetRooms();
     }
     
     /*
@@ -36,14 +35,10 @@ public class Menu extends World {
      * Initializes all the menu GUIs
      */
     private void setGUI() {
-        Title title = new Title();
-        addObject(title, 320, 144);
-        StartButton startBtn = new StartButton(); 
-        addObject(startBtn, 320, 260);
-        MoveHelp moveHelp = new MoveHelp();
-        addObject(moveHelp, 166, 265);
-        AtkHelp atkHelp = new AtkHelp();
-        addObject(atkHelp, 437, 265);
+        addObject(new Title(), 320, 144);  
+        addObject(new StartButton(), 320, 260); 
+        addObject(new MoveHelp(), 166, 265); 
+        addObject(new AtkHelp(), 437, 265);
         
     }
     

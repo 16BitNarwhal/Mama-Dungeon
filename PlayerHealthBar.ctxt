@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=PlayerHealthBar
+comment0.text=\r\n\ Healthbar\ for\ player\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=e
+comment1.target=PlayerHealthBar(Entity)
+comment1.text=\r\n\ PlayerHealthBar\ constructors\r\n
+comment2.params=e\ type
+comment2.target=PlayerHealthBar(Entity,\ java.lang.String)
+comment3.params=
+comment3.target=void\ act()
+numComments=4

@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Eric Zhang
  * @version (a version number or a date)
  */
-public class WallTile extends Tile {    
+public class WallTile extends Tile {   
     // set image based on type of wall
     public WallTile(String type) {
         // default wall type

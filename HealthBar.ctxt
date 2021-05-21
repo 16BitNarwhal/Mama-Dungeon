@@ -1,6 +1,15 @@
 #BlueJ class context
 comment0.target=HealthBar
 comment0.text=\r\n\ Entity\ health\ bar\ class\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=
-comment1.target=void\ act()
-numComments=2
+comment1.params=e\ scale\ barImg\ bgImg
+comment1.target=HealthBar(Entity,\ int,\ java.lang.String,\ java.lang.String)
+comment1.text=\r\n\ Healthbar\ constructors\r\n
+comment2.params=e\ type\ scale\ barImg\ bgImg
+comment2.target=HealthBar(Entity,\ java.lang.String,\ int,\ java.lang.String,\ java.lang.String)
+comment3.params=
+comment3.target=void\ initBasePos()
+comment3.text=\r\n\ Init\ base\ position\r\n
+comment4.params=
+comment4.target=void\ updateBar()
+comment4.text=\r\n\ Update\ healthbar\ according\ to\ entity\ health\r\n
+numComments=5

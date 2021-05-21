@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @version (a version number or a date)
  */
 public class Entity extends Actor {
-    protected float atkDmg, health;
+    protected float atkDmg, health, maxHealth;
     protected int movespeed;
     protected int dir; // 1 for left, 0 for right (direction)
     
@@ -85,6 +85,7 @@ public class Entity extends Actor {
      * Getters & Setters
      */
     public float getAtkDmg() { return this.atkDmg; }
+    public float getMaxHealth() { return this.maxHealth; }
     public float getHealth() { return this.health; }
     public int getSpeed() { return this.movespeed; }
     public int getDir() { return this.dir; }

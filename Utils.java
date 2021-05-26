@@ -11,7 +11,8 @@ public class Utils {
     public static int tileSize = 32,
         worldWidth = 640,
         worldHeight = 416;
-    
+    public static int FPS = 60;
+        
     /*
      * Method to help place objects at good position
      */

@@ -11,6 +11,7 @@ public class Entity extends Actor {
     protected float atkDmg, health, maxHealth;
     protected int movespeed;
     protected int dir; // 1 for left, 0 for right (direction)
+    protected Vector2 pos;
     
     protected String imgpath; // subclass
     protected int frame = 0;
@@ -33,23 +34,35 @@ public class Entity extends Actor {
         prevState = state;
         
         setLocation(pos.getX(), pos.getY());
+        this.pos = new Vector2(pos.getX(), pos.getY());
+    } 
+    
+    /*
+     * General animation
+     */
+    protected void animate() { 
+        if (state != prevState) {
+            frame = 0;
+        }
+        if (state=="idle") {
+            int fr = 60 / 4; // framerate
+            frame %= fr * idleAnim[dir].size();
+            setImage(idleAnim[dir].get(frame / fr));
+        } else if (state=="run") {
+            int fr = 60 / 12; // framerate
+            frame %= fr * runAnim[dir].size();
+            setImage(runAnim[dir].get(frame / fr));
+        }
+        prevState = state;
+        frame++;
     }
     
-    public void act() {        
-        move();
-        animate();
-        
-    }    
-    
     /*
-     * Move function (override in subclass)
+     * Update pos vector according to position
      */
-    private void move() { }
-    
-    /*
-     * Entity animation function (override in subclass)
-     */
-    private void animate() { }
+    protected void updatePos() {
+        pos = new Vector2(getX(), getY());
+    }
     
     /*
      * Initialize animations (overload in subclass)

@@ -17,6 +17,8 @@ public class Room extends World {
     protected Room leftRoom, rightRoom, upRoom, downRoom; // neighbouring rooms
     private int x1, x2, y1, y2; // room boundaries
     
+    private ArrayList<Enemy> enemies;
+    
     /**
      * Construct room with no given neighbours
      */ 
@@ -59,6 +61,12 @@ public class Room extends World {
         // create player
         player = new Player(this);
         addObject(player, Utils.worldWidth/2, Utils.worldHeight/2);
+        
+        enemies = new ArrayList<Enemy>();
+        // debug enemy
+        Zombie zombie = new Zombie(this);
+        enemies.add(zombie);
+        addObject(zombie, 200, 200);
     }
     
     /*
@@ -157,6 +165,7 @@ public class Room extends World {
     public int getID() { return this.id; }
     public static ArrayList<Room> getRooms() { return rooms; }
     public Player getPlayer() { return this.player; }
+    public ArrayList<Enemy> getEnemies() { return this.enemies; }
     
     public int getLeftBound() { return this.x1; }
     public int getRightBound() { return this.x2; }

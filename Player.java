@@ -32,12 +32,12 @@ public class Player extends Entity {
     }
     
     public void act() {
+        updatePos();
         move();
         animate();
         
         health -= 0.05;
-        health = Math.max(health, 0);
-        // System.out.println(Room.getRooms().size());
+        health = Math.max(health, 0); 
     }    
     
     /*
@@ -75,6 +75,7 @@ public class Player extends Entity {
     /*
      * Player animate function
      */
+    /*
     private void animate() { 
         if (state != prevState) {
             frame = 0;
@@ -91,6 +92,7 @@ public class Player extends Entity {
         prevState = state;
         frame++;
     }
+    */
     
     /*
      * Initialize player animations

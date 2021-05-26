@@ -36,6 +36,11 @@ public class Door extends Environment {
         if (player != null) {
             target.getPlayer().setStats(room.getPlayer());
             target.getPlayer().setRoomLocation(type);
+             
+            for (Enemy enemy : target.getEnemies()) {
+                enemy.enterRoom();
+            }
+           
             Greenfoot.setWorld(target);
         }
     }

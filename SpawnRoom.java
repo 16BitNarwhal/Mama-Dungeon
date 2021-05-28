@@ -17,6 +17,12 @@ public class SpawnRoom extends Room {
         addObject(new AtkHelp(), 470, 290);
         setPaintOrder(Player.class, MoveHelp.class, AtkHelp.class);
  
+        for (int i=0;i<10;i++) {
+            Zombie zombie = new Zombie(this, new Vector2(100,100));
+            enemies.add(zombie);
+            addObject(zombie, 0, 0); 
+        }
+        
     }
     
 }

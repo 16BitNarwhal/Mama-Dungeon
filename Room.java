@@ -17,7 +17,7 @@ public class Room extends World {
     protected Room leftRoom, rightRoom, upRoom, downRoom; // neighbouring rooms
     private int x1, x2, y1, y2; // room boundaries
     
-    private ArrayList<Enemy> enemies;
+    protected ArrayList<Enemy> enemies;
     
     /**
      * Construct room with no given neighbours
@@ -64,9 +64,11 @@ public class Room extends World {
         
         enemies = new ArrayList<Enemy>();
         // debug enemy
-        Zombie zombie = new Zombie(this);
+        /*
+        Zombie zombie = new Zombie(this, new Vector2(200,200));
         enemies.add(zombie);
-        addObject(zombie, 200, 200);
+        addObject(zombie, 0, 0);
+        */
     }
     
     /*
@@ -180,11 +182,14 @@ public class Room extends World {
 }
 
 /* 
- * Todo: nuthin for now :D 
+ * Todo: types of rooms
+ *  trap room - spikes etc. 
+ *  enemy rooms - undead, fire, etc.
+ *  support rooms - gold, healing, etc.
+ *  empty rooms
+ *  boss room 
  * 
- * Things to/can add:
- * 
- * boss room to end game
+ * extras:
  * difficulty (cur diff + random[0,1])
  * 
  */

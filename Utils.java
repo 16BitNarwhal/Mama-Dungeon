@@ -27,7 +27,23 @@ public class Utils {
     public static float random() {
         // [0, 10001) ==> [0, 10000]
         float f = Greenfoot.getRandomNumber(10001);
-        return f / 10001;
+        return f / 10000;
+    }
+    
+    /*
+     * Method to get random float [0, a] (inclusive)
+     */
+    public static float random(float a) {
+        // [0, 1] * a ==> [0, a]
+        return random()*a;
+    }
+    
+    /*
+     * Method to get random float [a, b] (inclusive)
+     */
+    public static float random(float a, float b) {
+        // [0+a, b-a+a] ==> [a, b]
+        return random(b-a) + a;
     }
     
     /*

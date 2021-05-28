@@ -11,11 +11,12 @@ public class Zombie extends Enemy {
     /*
      * Zombie constructors
      */
-    public Zombie(Room room) {
-        this(room, 1, 1, 1, new Vector2(), 50, 70, 100);
+    public Zombie(Room room, Vector2 pos) {
+        // room | atk|hp|spd| pos      |dst1 |dst2|detect
+        this(room, 1, 1, 1.5f, pos, 40, 50, 150);
     }
     
-    public Zombie(Room room, float atkDmg, float health, int movespeed, Vector2 pos, 
+    public Zombie(Room room, float atkDmg, float health, float movespeed, Vector2 pos, 
                     float distClose, float distFar, float detectRange) {
         super(room, atkDmg, health, movespeed, pos, distClose, distFar, detectRange);
         this.imgpath += "zombie/";

@@ -8,22 +8,27 @@ import java.util.ArrayList;
  * @version (a version number or a date)
  */
 public class Entity extends Actor {
-    protected float atkDmg, health, maxHealth;
-    protected int movespeed;
+    // health + dmg settings
+    protected float atkDmg, health, maxHealth; 
+    
+    // move settings
+    protected float movespeed;
     protected int dir; // 1 for left, 0 for right (direction)
     protected Vector2 pos;
     
+    // image + animation settings
     protected String imgpath; // subclass
     protected int frame = 0;
     protected String state, prevState;
     protected ArrayList<GreenfootImage>[] idleAnim, runAnim;
     
+    // references
     protected Room room;
     
     /*
      * Entity constructors
      */
-    public Entity(Room room, float atkDmg, float health, int movespeed, Vector2 pos) {
+    public Entity(Room room, float atkDmg, float health, float movespeed, Vector2 pos) {
         this.room = room;
         this.atkDmg = atkDmg;
         this.health = health;
@@ -33,8 +38,7 @@ public class Entity extends Actor {
         state = "idle";
         prevState = state;
         
-        setLocation(pos.getX(), pos.getY());
-        this.pos = new Vector2(pos.getX(), pos.getY());
+        this.pos = pos.get();
     } 
     
     /*
@@ -58,10 +62,30 @@ public class Entity extends Actor {
     }
     
     /*
-     * Update pos vector according to position
+     * Update pos according to vector
      */
     protected void updatePos() {
-        pos = new Vector2(getX(), getY());
+        setLocation(pos.getX(), pos.getY());
+    }
+    
+    /*
+     * Move functions
+     */
+    protected void move(Vector2 v) {
+        this.pos = Vector2.add(this.pos, v); 
+    }
+    
+    protected void move(float x, float y) {
+        moveX(x);
+        moveY(y);
+    } 
+     
+    protected void moveX(float x) {
+        this.pos.setX(pos.getX() + x);
+    }
+    
+    protected void moveY(float y) {
+        this.pos.setY(pos.getY() + y);
     }
     
     /*
@@ -100,8 +124,12 @@ public class Entity extends Actor {
     public float getAtkDmg() { return this.atkDmg; }
     public float getMaxHealth() { return this.maxHealth; }
     public float getHealth() { return this.health; }
-    public int getSpeed() { return this.movespeed; }
+    public float getSpeed() { return this.movespeed; }
     public int getDir() { return this.dir; }
+    
+    public void setAtkDmg(float dmg) { this.atkDmg = dmg; }
+    public void setHealth(float hp) { this.health = hp; }
+    public void setSpeed(float spd) { this.movespeed = spd; }
     
     /*
      * Help transfer player stats from one room to another
@@ -112,20 +140,5 @@ public class Entity extends Actor {
         this.health = p.getHealth();
         this.movespeed = p.getSpeed();
         this.dir = p.getDir(); 
-    }
-    
-    /*
-     * Relocate player after entering a room
-     */
-    public void setRoomLocation(String type) {
-        if (type=="right") {
-            setLocation(93, 194);
-        } else if (type=="left") {
-            setLocation(546, 194);
-        } else if (type=="down") {
-            setLocation(320, 95);
-        } else if (type=="up") {
-            setLocation(320, 314);
-        }
     } 
 }

@@ -16,7 +16,7 @@ public class Player extends Entity {
         this.maxHealth = 100;
     }
     
-    public Player(Room room, float atkDmg, float health, int movespeed, Vector2 pos) {
+    public Player(Room room, float atkDmg, float health, float movespeed, Vector2 pos) {
         super(room, atkDmg, health, movespeed, pos); 
         
         this.imgpath = "player/";
@@ -31,10 +31,10 @@ public class Player extends Entity {
         healthBar.initBasePos();
     }
     
-    public void act() {
-        updatePos();
-        move();
+    public void act() { 
+        movement();
         animate();
+        updatePos();
         
         health -= 0.05;
         health = Math.max(health, 0); 
@@ -43,7 +43,7 @@ public class Player extends Entity {
     /*
      * Player movement + key handling
      */
-    private void move() {
+    private void movement() {
         boolean up = Greenfoot.isKeyDown("w");
         boolean down = Greenfoot.isKeyDown("s");
         boolean left = Greenfoot.isKeyDown("a");
@@ -51,17 +51,17 @@ public class Player extends Entity {
         
         // check if player not touching bounds and corresponding key pressed to move
         if (getY() > room.getUpBound() && up) {
-            setLocation(getX(), getY() - movespeed);
+            moveY(-movespeed);
         }
         if (getY() < room.getDownBound()-16 && down) {
-            setLocation(getX(), getY() + movespeed);
+            moveY(movespeed);
         }
         if (getX() > room.getLeftBound()+8 && left) {
-            setLocation(getX() - movespeed, getY());
+            moveX(-movespeed);
             dir = 1;
         }
         if (getX() < room.getRightBound()-8 && right) {
-            setLocation(getX() + movespeed, getY());
+            moveX(movespeed);
             dir = 0;
         }
         
@@ -106,14 +106,6 @@ public class Player extends Entity {
     }
     
     /*
-     * Getters & Setters
-     */
-    public float getAtkDmg() { return this.atkDmg; }
-    public float getHealth() { return this.health; }
-    public int getSpeed() { return this.movespeed; }
-    public int getDir() { return this.dir; }
-    
-    /*
      * Help transfer player stats from one room to another
      */ 
     public void setStats(Player p) {
@@ -129,14 +121,15 @@ public class Player extends Entity {
      */
     public void setRoomLocation(String type) {
         if (type=="right") {
-            setLocation(93, 194);
+            pos = new Vector2(93, 194); 
         } else if (type=="left") {
-            setLocation(546, 194);
+            pos = new Vector2(546, 194); 
         } else if (type=="down") {
-            setLocation(320, 95);
+            pos = new Vector2(320, 95);
         } else if (type=="up") {
-            setLocation(320, 314);
+            pos = new Vector2(320, 314);
         }
+        updatePos();
     }
 }
 

@@ -1,4 +1,3 @@
-
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
@@ -21,9 +20,10 @@ public class Enemy extends Entity {
         this(room, atkDmg, health, movespeed, pos, 50, 70, 200);
     }
     
-    public Enemy(Room room, float atkDmg, float health, int movespeed, Vector2 pos, 
+    public Enemy(Room room, float atkDmg, float health, float movespeed, Vector2 pos, 
                         float distClose, float distFar, float detectRange) {
         super(room, atkDmg, health, movespeed, pos);
+        setSpeed(Utils.random(movespeed-0.2f, movespeed+0.2f));
         this.maxHealth = health;
         this.imgpath = "enemy/";
         this.distClose = distClose;
@@ -31,33 +31,33 @@ public class Enemy extends Entity {
         this.detectRange = detectRange;
     }
     
-    public void act() {
-        updatePos();
-        move();
+    public void act() {        
+        movement();
         animate(); 
         
+        updatePos();
     }
     
     /*
      * Method to move (moves within a distance of the player)
      */
-    protected void move() {
+    protected void movement() {
         if (followPlayer) {
             state = "run";
             Vector2 playerPos = room.getPlayer().pos;
             // current distance
             float dist = Vector2.distance(pos, playerPos);
             
-            Vector2 nextPos = new Vector2();
+            Vector2 nextMove = new Vector2();
             if (dist > distFar) {
-                nextPos = Vector2.sub(playerPos, pos); 
+                nextMove = Vector2.sub(playerPos, pos); 
             } else if (dist < distClose) {
-                nextPos = Vector2.sub(pos, playerPos); 
+                nextMove = Vector2.sub(pos, playerPos); 
             }
-            if (nextPos.mag() > 0)
-                nextPos = nextPos.mult(movespeed / nextPos.mag()); 
-            nextPos = Vector2.add(nextPos, pos);
-            setLocation(nextPos.getX(), nextPos.getY()); 
+            if (nextMove.mag() > 0)
+                nextMove = nextMove.mult(movespeed / nextMove.mag()); 
+                
+            move(nextMove);
         } else {
             state = "idle";
             Vector2 playerPos = room.getPlayer().pos;

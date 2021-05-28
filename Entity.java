@@ -52,11 +52,11 @@ public class Entity extends Actor {
             int fr = 60 / 4; // framerate
             frame %= fr * idleAnim[dir].size();
             setImage(idleAnim[dir].get(frame / fr));
-        } else if (state=="run") {
+        } else if (state=="run" || state=="follow" || state=="attack") {
             int fr = 60 / 12; // framerate
             frame %= fr * runAnim[dir].size();
             setImage(runAnim[dir].get(frame / fr));
-        }
+        } 
         prevState = state;
         frame++;
     }
@@ -96,7 +96,6 @@ public class Entity extends Actor {
         idleAnim[0] = new ArrayList<GreenfootImage>(); // face right
         idleAnim[1] = new ArrayList<GreenfootImage>(); // face left
         for (int f=0;f<frameCnt;f++) { // go through all frames 
-            
             GreenfootImage img = new GreenfootImage(imgpath+file+f+".png");
             img.scale(img.getWidth()*2, img.getHeight()*2);
             idleAnim[0].add(new GreenfootImage(img)); // facing right
@@ -126,6 +125,7 @@ public class Entity extends Actor {
     public float getHealth() { return this.health; }
     public float getSpeed() { return this.movespeed; }
     public int getDir() { return this.dir; }
+    public Vector2 getPos() { return this.pos; }
     
     public void setAtkDmg(float dmg) { this.atkDmg = dmg; }
     public void setHealth(float hp) { this.health = hp; }

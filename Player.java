@@ -36,7 +36,6 @@ public class Player extends Entity {
         animate();
         updatePos();
         
-        health -= 0.05;
         health = Math.max(health, 0); 
     }    
     
@@ -73,26 +72,12 @@ public class Player extends Entity {
     } 
     
     /*
-     * Player animate function
+     * Player is attacked / loses health
      */
-    /*
-    private void animate() { 
-        if (state != prevState) {
-            frame = 0;
-        }
-        if (state=="idle") {
-            int fr = 60 / 4; // framerate
-            frame %= fr * idleAnim[dir].size();
-            setImage(idleAnim[dir].get(frame / fr));
-        } else if (state=="run") {
-            int fr = 60 / 12; // framerate
-            frame %= fr * runAnim[dir].size();
-            setImage(runAnim[dir].get(frame / fr));
-        }
-        prevState = state;
-        frame++;
+    public void loseHealth(float dmg) {
+        health -= dmg;
+        room.addObject(new PlayerHurt(), Utils.worldWidth/2, Utils.worldHeight/2);
     }
-    */
     
     /*
      * Initialize player animations
@@ -135,8 +120,9 @@ public class Player extends Entity {
 
 /*
  * Todo:
+ * Attack and kill enemies
+ * 
+ * Idea:
  * invincibility when hit by enemy / entering rooms
- * decrease health when hit by enemy
- * play hit animation when hit by enemy
  * 
  */

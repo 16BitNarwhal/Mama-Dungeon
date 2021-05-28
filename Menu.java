@@ -10,7 +10,7 @@ public class Menu extends World {
     
     /*
      * Construct main menu 
-     */ 
+     */
     public Menu() {
         super(Utils.worldWidth, Utils.worldHeight, 1);
         setBG();

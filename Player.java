@@ -29,6 +29,9 @@ public class Player extends Entity {
         PlayerHealthBar healthBar = new PlayerHealthBar(this, "bar");
         room.addObject(healthBar, 100, 30);
         healthBar.initBasePos();
+        
+        Weapon w = new Weapon(this, 1, 1, 30);
+        room.addObject(w, 0, 0);
     }
     
     public void act() { 

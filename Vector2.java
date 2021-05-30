@@ -53,6 +53,12 @@ public class Vector2 {
         Vector2 temp = Vector2.sub(a,b);
         return temp.mag();
     }
+    /*
+     * Normalizes vector
+     */
+    public Vector2 normalize() {
+        return new Vector2(x / mag(), y / mag());
+    }
     
     /*
      * Getters and setters
@@ -64,7 +70,7 @@ public class Vector2 {
     public void setY(float y) { this.y = y; }
     
     public void setX(int x) { this.x = x; }
-    public void setY(int y) { this.y = y; } 
+    public void setY(int y) { this.y = y; }
     
     // returns copy of this vector
     public Vector2 get() { return new Vector2(x, y); } 

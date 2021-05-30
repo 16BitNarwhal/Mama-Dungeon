@@ -1,3 +1,4 @@
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 
@@ -13,12 +14,12 @@ public class Entity extends Actor {
     
     // move settings
     protected float movespeed;
-    protected int dir; // 1 for left, 0 for right (direction)
     protected Vector2 pos;
     
     // image + animation settings
     protected String imgpath; // subclass
     protected int frame = 0;
+    protected int dir; // 1 for left, 0 for right (direction)
     protected String state, prevState;
     protected ArrayList<GreenfootImage>[] idleAnim, runAnim;
     
@@ -89,7 +90,7 @@ public class Entity extends Actor {
     }
     
     /*
-     * Initialize animations (overload in subclass)
+     * Initialize animations 
      */
     protected void initIdleAnim(String file, int frameCnt) {
         idleAnim = new ArrayList[2];

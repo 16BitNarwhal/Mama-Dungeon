@@ -118,6 +118,10 @@ public class Entity extends Actor {
         }
     }
     
+    public void loseHealth(float dmg) {
+        health -= dmg;
+    }
+    
     /*
      * Getters & Setters
      */

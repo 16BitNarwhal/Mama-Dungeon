@@ -22,7 +22,7 @@ public class Room extends World {
     /**
      * Construct room with no given neighbours
      */ 
-    public Room() { 
+    public Room() {
         this(0, null, null, null, null);
     }
     
@@ -63,12 +63,11 @@ public class Room extends World {
         addObject(player, Utils.worldWidth/2, Utils.worldHeight/2);
         
         enemies = new ArrayList<Enemy>();
-        // debug enemy
-        /*
-        Zombie zombie = new Zombie(this, new Vector2(200,200));
-        enemies.add(zombie);
-        addObject(zombie, 0, 0);
-        */
+        
+    }
+    
+    public void act() {
+        setPaintOrder(Weapon.class, Enemy.class, Player.class, MoveHelp.class, AtkHelp.class);
     }
     
     /*
@@ -80,19 +79,19 @@ public class Room extends World {
             float prob = 0.5f - rad/(2f*maxRad);
             if (leftRoom==null && Utils.random() <= prob) {
                 // right of new room is this
-                leftRoom = new Room(rad+1, null, this, null, null);
+                leftRoom = newRoom(null, this, null, null);
             }
             if (rightRoom==null && Utils.random() <= prob) {
                 // left of new room is this
-                rightRoom = new Room(rad+1, this, null, null, null); 
+                rightRoom = newRoom(this, null, null, null); 
             }
             if (upRoom==null && Utils.random() <= prob) {
                 // down of new room is this
-                upRoom = new Room(rad+1, null, null, null, this);
+                upRoom = newRoom(null, null, null, this);
             }
             if (downRoom==null && Utils.random() <= prob) {
                 // up of new room is this
-                downRoom = new Room(rad+1, null, null, this, null);
+                downRoom = newRoom(null, null, this, null);
             }
             // if first room and no neighbour rooms, restart
             if (id==1 && leftRoom==null && rightRoom==null &&
@@ -100,6 +99,22 @@ public class Room extends World {
                 initRooms();
             }
         }
+    }
+    
+    /*
+     * Create new random room
+     */
+    private Room newRoom(Room a, Room b, Room c, Room d) {
+        // init probabilites here
+        float enemy = 10; // 3
+        
+        float empty = 6 + enemy;
+        
+        if (Utils.random() <= enemy / empty) {
+            return new EnemyRoom(rad+1, a, b, c, d);
+        }
+        
+        return new Room(rad+1, a, b, c, d);
     }
     
     /*

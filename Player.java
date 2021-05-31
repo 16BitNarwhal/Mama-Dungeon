@@ -12,7 +12,8 @@ public class Player extends Entity {
      * Player constructors
      */
     public Player(Room room) {
-        this(room, 3, 100, 2, new Vector2(Utils.worldWidth/2, Utils.worldHeight/2));
+        //  room |atk| hp| spd | pos
+        this(room, 2.5f, 100, 2, new Vector2(Utils.worldWidth/2, Utils.worldHeight/2));
         this.maxHealth = 100;
     }
     
@@ -30,7 +31,7 @@ public class Player extends Entity {
         room.addObject(healthBar, 100, 30);
         healthBar.initBasePos();
         
-        Weapon w = new Weapon(this, 1, 1, 30);
+        PlayerWeapon w = new PlayerWeapon(this, 3f, 30);
         room.addObject(w, 0, 0);
     }
     
@@ -78,8 +79,13 @@ public class Player extends Entity {
      * Player is attacked / loses health
      */
     public void loseHealth(float dmg) {
-        health -= dmg;
+        super.loseHealth(dmg);
         room.addObject(new PlayerHurt(), Utils.worldWidth/2, Utils.worldHeight/2);
+        
+        if (health <= 0) {
+            System.out.println("You dead!!!");
+            // create death world or smht
+        }
     }
     
     /*

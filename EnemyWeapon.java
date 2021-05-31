@@ -1,24 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class EnemyWeapon here.
+ * Enemy Weapon (not in use for now)
  * 
- * @author (your name) 
+ * @author Eric Zhang
  * @version (a version number or a date)
  */
 public class EnemyWeapon extends Weapon { 
     
     public EnemyWeapon(Enemy user, Player player) {
-        this(user, 1, 1, 1, player);
+        this(user, 1, 1, player);
     }
     
-    public EnemyWeapon(Enemy user, float atkDmg, float range, float dist, Player player) {
-        super(user, atkDmg, range, dist);
+    public EnemyWeapon(Enemy user, float atkDmg, float dist, Player player) {
+        super(user, atkDmg, dist);
         
     }
-    
-    public void act() 
-    {
-        // Add your action code here.
-    }    
 }

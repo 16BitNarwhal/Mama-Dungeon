@@ -8,15 +8,44 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class PlayerWeapon extends Weapon { 
     
-    public PlayerWeapon(Player user, float atkDmg, float range, float dist) {
-        super(user, atkDmg, range, dist);
+    private boolean mouseDown = false;
+    
+    public PlayerWeapon(Player user, float atkDmg, float dist) {
+        super(user, atkDmg, dist);
         
+        this.imgpath = "weapon/regular_sword/";
+        initIdleAnim("weapon_regular_sword", 1);
+        initAtkAnim("weapon_regular_sword_attack", 4);
     }
     
     public void act() {
-        MouseInfo mouse = Greenfoot.getMouseInfo();
-        updatePos(new Vector2(mouse.getX(), mouse.getY()));
+        super.act();
         
-    }    
-     
+        followMouse();
+        updateState();
+        handleAttack(Enemy.class);
+    }
+    
+    private void followMouse() {        
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+        if (mouse != null) 
+            target = new Vector2(mouse.getX(), mouse.getY());
+        updatePos(new Vector2(target.getX(), target.getY()));
+    }
+    
+    private void updateState() {        
+        if (Greenfoot.mousePressed(null)) {
+            this.state = "attack";
+        } else if (Greenfoot.mouseClicked(null)) {
+            this.state = "idle";
+        }
+    }
+    
+    protected boolean willHurt(int frame, int fr) { 
+        if (frame/fr > 0 && frame/fr < atkAnim[0].size() - 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=EnemyRoom
+comment0.text=\r\n\ Room\ with\ enemies\ spawns\ in\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=rad\ l\ r\ u\ d
+comment1.target=EnemyRoom(int,\ Room,\ Room,\ Room,\ Room)
+comment1.text=\r\n\ Construct\ EnemyRoom\r\n
+numComments=2

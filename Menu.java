@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class Menu extends World {
-    
+
     /*
      * Construct main menu 
      */
@@ -17,8 +17,9 @@ public class Menu extends World {
         setGUI();
         // reset rooms
         Room.resetRooms();
+        prepare();
     }
-    
+
     /*
      * Creates a background filled with wall tiles
      */
@@ -30,7 +31,7 @@ public class Menu extends World {
             }
         }
     }
-    
+
     /*
      * Initializes all the menu GUIs
      */
@@ -39,7 +40,14 @@ public class Menu extends World {
         addObject(new StartButton(), 320, 260); 
         addObject(new MoveHelp(), 166, 265); 
         addObject(new AtkHelp(), 437, 265);
-        
+
     }
-    
+
+    /**
+     * Prepare the world for the start of the program.
+     * That is: create the initial objects and add them to the world.
+     */
+    private void prepare()
+    {
+    }
 }

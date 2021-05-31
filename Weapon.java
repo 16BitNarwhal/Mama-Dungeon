@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Weapons for entities
@@ -10,41 +11,45 @@ import java.util.ArrayList;
 public class Weapon extends Actor { 
     
     private Entity user;
-    private Vector2 offset, target;
+    protected Vector2 offset, target;
     private float atkDmg; // adds to atkDmg of entity
-    private float atkRange, posDist; // posDist used to calc pos
+    private float posDist; // posDist used to calc pos
     
     // image + animation settings
-    private String imgpath; // subclass
+    protected String imgpath; // subclass
     private int frame = 0;
-    protected int dir; // 1 for left, 0 for right (direction)
-    private String state, prevState;
-    private ArrayList<GreenfootImage>[] idleAnim, atkAnim;
+    private int dir; // 1 for left, 0 for right (direction)
+    protected String state, prevState;
+    protected ArrayList<GreenfootImage>[] idleAnim, atkAnim;
+    protected boolean hurt;
     
     /*
      * Weapon constructors
      */
-    public Weapon(Entity user, float atkDmg, float range, float dist) {
+    public Weapon(Entity user, float atkDmg, float dist) {
         this.user = user;
-        this.atkDmg = atkDmg;
-        this.atkRange = range;
+        this.atkDmg = atkDmg; 
         this.posDist = dist;
-        this.offset = new Vector2(0, -5);
+        this.offset = new Vector2(0, 10);
         
-        this.imgpath = "weapon/regular_sword/";
         this.state = "idle";
-        initIdleAnim("weapon_regular_sword", 4);
-        initAtkAnim("weapon_regular_sword", 4);
+        this.hurt = false;
     }
     
     public void act() {
         animate();
         
-        System.out.println(getX() + " " + getY());
-        MouseInfo mouse = Greenfoot.getMouseInfo();
-        if (mouse != null) 
-            target = new Vector2(mouse.getX(), mouse.getY());
-        updatePos(new Vector2(target.getX(), target.getY()));
+    }
+
+    protected void handleAttack(Class enemyClass) {
+        if (this.state == "attack" && this.hurt) {
+            List<Entity> enemies = getIntersectingObjects(enemyClass);
+            
+            for (Entity e : enemies) {
+                float dmg = Utils.random(atkDmg*1/2, atkDmg*3/2);
+                e.loseHealth(atkDmg + user.getAtkDmg());
+            }
+        }
     }
     
     protected void updatePos(Vector2 target) {
@@ -68,19 +73,30 @@ public class Weapon extends Actor {
         setLocation(pos.getX(), pos.getY());
     }
     
-    private void animate() {
+    protected void animate() {
         if (state=="idle") {
             int fr = 60 / 6; // framerate
             frame %= fr * idleAnim[dir].size();
             setImage(idleAnim[dir].get(frame / fr));
+            
+            hurt = false;
         } else if (state=="attack") {
             int fr = 60 / 6; // framerate
             frame %= fr * atkAnim[dir].size();
             setImage(atkAnim[dir].get(frame / fr));
-        } 
+            
+            hurt = willHurt(frame, fr);
+        }
         prevState = state;
         frame++;
-    }    
+    }
+    
+    /*
+     * Will set when attack hurts (for example downswing vs upswing)
+     */
+    protected boolean willHurt(int frame, int fr) {
+        return true;
+    }
     
     /*
      * Initialize animations 

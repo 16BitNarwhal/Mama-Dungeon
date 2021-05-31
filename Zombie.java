@@ -13,7 +13,7 @@ public class Zombie extends Enemy {
      */
     public Zombie(Room room, Vector2 pos) {
         // room | atk|hp|spd| pos |dst1 |dst2|detect | wait
-        this(room, 1, 1, 1.5f, pos, 40,   50,   150,    3);
+        this(room, 10, 20, 1.5f, pos, 40,   50,   150,  1.7f);
     }
     
     public Zombie(Room room, float atkDmg, float health, float movespeed, Vector2 pos, 

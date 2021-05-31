@@ -14,7 +14,7 @@ public class HealthBar extends GUI {
     
     private Vector2 basePos; // original position (for bar, not bg)
     private String type;
-    private Entity entity;
+    protected Entity entity;
     
     /*
      * Healthbar constructors
@@ -57,7 +57,7 @@ public class HealthBar extends GUI {
                 img.setTransparency(255);
                 img.scale(Math.round(width) * imgScale, 
                             baseImg.getHeight() * imgScale);
-            } 
+            }
             setLocation(Math.round(basePos.getX()-baseImg.getWidth()+width), 
                             basePos.getY());
         }

@@ -12,6 +12,7 @@ public class Enemy extends Entity {
     private float distClose, distFar; // distance enemy tries to keep from player
     private float detectRange; // check when enemy sees player
     private float atkWait, atkTimer; // time until next attack (in frames/cycles)
+    private float hurtWait, hurtTimer; // short invinicibility, hurt by player
     protected String atkType; // 'melee' or 'range'
     private static Vector2 playerOffset = new Vector2(0, 10);
     
@@ -23,16 +24,25 @@ public class Enemy extends Entity {
     }
     
     public Enemy(Room room, float atkDmg, float health, float movespeed, Vector2 pos, 
-                        float distClose, float distFar, float detectRange, float waitTime) {
+                        float distClose, float distFar, float detectRange, float atkWait) {
         super(room, atkDmg, health, movespeed, pos);
         setSpeed(Utils.random(movespeed-0.2f, movespeed+0.2f));
         this.maxHealth = health;
+        
         this.imgpath = "enemy/";
+        
         this.distClose = distClose;
         this.distFar = distFar; 
         this.detectRange = detectRange;
-        this.atkWait = waitTime;
+        
+        this.atkWait = atkWait;
         this.atkTimer = this.atkWait;
+        
+        this.hurtWait = 0.5f;
+        
+        EnemyHealthBar healthBar = new EnemyHealthBar(this, "bar");
+        room.addObject(healthBar, 100, 30);
+        healthBar.initBasePos();
     }
     
     public void act() {
@@ -114,7 +124,17 @@ public class Enemy extends Entity {
      */
     private void updateTime() {
         if (state=="follow") atkTimer -= 1f / Utils.FPS;
-        
+        if (hurtTimer > 0) hurtTimer -= 1f / Utils.FPS;
+    }
+    
+    public void loseHealth(float dmg) {
+        if (hurtTimer <= 0) {
+            super.loseHealth(dmg);        
+            if (health <= 0) {
+                room.removeObject(this);
+            }
+            hurtTimer = hurtWait;
+        } 
     }
     
     /*

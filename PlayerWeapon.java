@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class PlayerWeapon here.
  * 
- * @author (your name) 
+ * @author Eric Zhang
  * @version (a version number or a date)
  */
 public class PlayerWeapon extends Weapon { 
@@ -28,8 +28,11 @@ public class PlayerWeapon extends Weapon {
     
     private void followMouse() {        
         MouseInfo mouse = Greenfoot.getMouseInfo();
-        if (mouse != null) 
+        if (mouse != null) {
             target = new Vector2(mouse.getX(), mouse.getY());
+        } else {
+            target = user.getPos();
+        }
         updatePos(new Vector2(target.getX(), target.getY()));
     }
     

@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @version (a version number or a date)
  */
 public class Room extends World {
-    private static ArrayList<Room> rooms = new ArrayList<Room>(); // all rooms
+    protected static ArrayList<Room> rooms = new ArrayList<Room>(); // all rooms
     protected final int maxRad = 4; // max radius (distance of rooms from start)
     protected int rad; // current distance / radius from start
     
@@ -52,7 +52,9 @@ public class Room extends World {
         
         // create new rooms & add doors for each neighbour room
         this.rad = rad;
-        initRooms();
+        if (!(this instanceof BossRoom)) {
+            initRooms();
+        }
         initDoors();
         
         // debug room id
@@ -106,9 +108,9 @@ public class Room extends World {
      */
     private Room newRoom(Room a, Room b, Room c, Room d) {
         // init probabilites here
-        float enemy = 10; // 3
+        float enemy = 1; // 3
         
-        float empty = 6 + enemy;
+        float empty = 1 + enemy;
         
         if (Utils.random() <= enemy / empty) {
             return new EnemyRoom(rad+1, a, b, c, d);
@@ -171,10 +173,18 @@ public class Room extends World {
         
     }
     
-    private void addEnemies() { }
-    private void addCoins() { }
-    
-    public static void resetRooms() { rooms.clear(); }
+    /*
+     * Reset / clear any existing rooms for 'new game'
+     */
+    public static void resetRooms() { 
+        for (Room room : rooms) {
+            room.clearRoom();
+        }
+        rooms.clear();
+    }
+    public void clearRoom() {
+        leftRoom = null; rightRoom = null; upRoom = null; downRoom = null; 
+    }
     
     /*
      * Getters & setters
@@ -184,10 +194,25 @@ public class Room extends World {
     public Player getPlayer() { return this.player; }
     public ArrayList<Enemy> getEnemies() { return this.enemies; }
     
+    public int getNeighbours() {
+        int cnt = 0;
+        cnt += (this.leftRoom != null) ? 1 : 0;
+        cnt += (this.rightRoom != null) ? 1 : 0;
+        cnt += (this.upRoom != null) ? 1 : 0;
+        cnt += (this.downRoom != null) ? 1 : 0;
+        return cnt;
+    }
+    public int getRad() { return this.rad; }
+    
     public int getLeftBound() { return this.x1; }
     public int getRightBound() { return this.x2; }
     public int getUpBound() { return this.y1; }
     public int getDownBound() { return this.y2; }
+
+    public Room getLeftRoom() { return leftRoom; }
+    public Room getRightRoom() { return rightRoom; }
+    public Room getUpRoom() { return upRoom; }
+    public Room getDownRoom() { return downRoom; }
     
     public void setLeftRoom(Room r) { this.leftRoom = r; }
     public void setRightRoom(Room r) { this.rightRoom = r; }

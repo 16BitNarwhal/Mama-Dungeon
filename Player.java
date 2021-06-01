@@ -8,9 +8,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Player extends Entity {       
     
+    
+    
     /*
      * Player constructors
-     */
+     */    
     public Player(Room room) {
         //  room |atk| hp| spd | pos
         this(room, 2.5f, 100, 2, new Vector2(Utils.worldWidth/2, Utils.worldHeight/2));
@@ -31,8 +33,8 @@ public class Player extends Entity {
         room.addObject(healthBar, 100, 30);
         healthBar.initBasePos();
         
-        PlayerWeapon w = new PlayerWeapon(this, 3f, 30);
-        room.addObject(w, 0, 0);
+        weapon = new PlayerWeapon(this, 3f, 30);
+        room.addObject(weapon, 0, 0);
     }
     
     public void act() { 
@@ -53,18 +55,22 @@ public class Player extends Entity {
         boolean right = Greenfoot.isKeyDown("d");
         
         // check if player not touching bounds and corresponding key pressed to move
+        float speed = movespeed;
+        if (weapon.isAttacking()) {
+            speed /= 2; // 2 can be weapon's weight (add if I have time)
+        }
         if (getY() > room.getUpBound() && up) {
-            moveY(-movespeed);
+            moveY(-speed);
         }
         if (getY() < room.getDownBound()-16 && down) {
-            moveY(movespeed);
+            moveY(speed);
         }
         if (getX() > room.getLeftBound()+8 && left) {
-            moveX(-movespeed);
+            moveX(-speed);
             dir = 1;
         }
         if (getX() < room.getRightBound()-8 && right) {
-            moveX(movespeed);
+            moveX(speed);
             dir = 0;
         }
         

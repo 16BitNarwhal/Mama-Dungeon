@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Weapon extends Actor { 
     
-    private Entity user;
+    protected Entity user;
     protected Vector2 offset, target;
     private float atkDmg; // adds to atkDmg of entity
     private float posDist; // posDist used to calc pos
@@ -125,11 +125,13 @@ public class Weapon extends Actor {
             img.mirrorHorizontally(); // facing left
             atkAnim[1].add(img);
         }
-    }
+    } 
     
     /*
-     * Setters
+     * Getters & Setters
      */
+    public boolean isAttacking() { return state=="attack"; }
+    
     protected void setOffset(Vector2 offset) { this.offset = offset; }
     
 }

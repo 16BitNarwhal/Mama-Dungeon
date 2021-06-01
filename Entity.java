@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Entity extends Actor {
     // health + dmg settings
     protected float atkDmg, health, maxHealth; 
+    protected Weapon weapon;
     
     // move settings
     protected float movespeed;

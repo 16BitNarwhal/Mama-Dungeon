@@ -20,7 +20,7 @@ public class EnemyRoom extends Room {
             float y = Utils.random(getUpBound(), getDownBound());
             Zombie zombie = new Zombie(this, new Vector2(x,y));
             enemies.add(zombie);
-            addObject(zombie, 0, 0); 
+            addObject(zombie, 0, 0);
         }
         
     }

@@ -16,9 +16,7 @@ public class EnemyRoom extends Room {
             
         int numEnemies = Utils.random(3, 6);
         for (int i=0;i<numEnemies;i++) {
-            float x = Utils.random(getLeftBound(), getRightBound());
-            float y = Utils.random(getUpBound(), getDownBound());
-            Zombie zombie = new Zombie(this, new Vector2(x,y));
+            Zombie zombie = new Zombie(this);
             enemies.add(zombie);
             addObject(zombie, 0, 0);
         }

@@ -1,9 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Zombie here.
+ * Zombie Enemy
  * 
- * @author (your name) 
+ * @author Eric Zhang 
  * @version (a version number or a date)
  */
 public class Zombie extends Enemy {
@@ -11,6 +11,11 @@ public class Zombie extends Enemy {
     /*
      * Zombie constructors
      */
+    public Zombie(Room room) {
+        this(room, new Vector2(Utils.random(room.getLeftBound(), room.getRightBound()),
+                Utils.random(room.getUpBound(), room.getDownBound())));
+    }
+    
     public Zombie(Room room, Vector2 pos) {
         // room | atk|hp|spd| pos |dst1 |dst2|detect | wait
         this(room, 10, 20, 1.5f, pos, 40,   50,   150,  1.7f);

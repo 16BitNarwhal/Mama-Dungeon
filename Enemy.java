@@ -18,7 +18,7 @@ public class Enemy extends Entity {
     
     /*
      * Enemy constructor
-     */     
+     */
     public Enemy(Room room, float atkDmg, float health, int movespeed, Vector2 pos) {
         this(room, atkDmg, health, movespeed, pos, 50, 70, 200, 3); // default
     }
@@ -55,6 +55,7 @@ public class Enemy extends Entity {
     
     /*
      * Method to move (moves within a distance of the player)
+     * Also manages attacks
      */
     protected void movement() {
         Player player = room.getPlayer();
@@ -120,13 +121,16 @@ public class Enemy extends Entity {
     }
     
     /*
-     * Update timer(s) based on FPS
+     * Update timers based on FPS
      */
-    private void updateTime() {
+    protected void updateTime() {
         if (state=="follow") atkTimer -= 1f / Utils.FPS;
         if (hurtTimer > 0) hurtTimer -= 1f / Utils.FPS;
     }
     
+    /*
+     * When enemy loses health
+     */
     public void loseHealth(float dmg) {
         if (hurtTimer <= 0) {
             super.loseHealth(dmg);        
@@ -144,6 +148,12 @@ public class Enemy extends Entity {
         this.state = "idle";
     }
     
+    /*
+     * Max detect range for boss fights
+     */
+    public void maxDetect() {
+        detectRange = Utils.worldWidth + Utils.worldHeight;
+    }
 }
 
 /*

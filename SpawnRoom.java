@@ -38,28 +38,28 @@ public class SpawnRoom extends Room {
         Room room = endRooms.get(idx);
         Room bossRoom = null;
         // debug
-        System.out.println(room.getID());
+        System.out.println("Room by boss room: " + room.getID());
         while (bossRoom == null) {
             float x = Utils.random();
             if (x <= 0.25f && room.getLeftRoom() == null) {
                 bossRoom = new BossRoom(room.getRad()+1, null, room, null, null);
                 room.setLeftRoom(bossRoom);
-                room.addObject(new Door(this, bossRoom, "left"), 42, 200);
+                room.addObject(new Door(room, bossRoom, "left"), 42, 200);
             } else if (x <= 0.5f && room.getRightRoom() == null) {
                 bossRoom = new BossRoom(room.getRad()+1, room, null, null, null);
                 room.setRightRoom(bossRoom);
-                room.addObject(new Door(this, bossRoom, "right"), 598, 200);
+                room.addObject(new Door(room, bossRoom, "right"), 598, 200);
             } else if (x <= 0.75f && room.getUpRoom() == null) {
                 bossRoom = new BossRoom(room.getRad()+1, null, null, null, room);
                 room.setUpRoom(bossRoom);
-                room.addObject(new Door(this, bossRoom, "up"), 320, 32);
+                room.addObject(new Door(room, bossRoom, "up"), 320, 32);
             } else if (x <= 1f && room.getDownRoom() == null) {
                 bossRoom = new BossRoom(room.getRad()+1, null, null, room, null);
                 room.setDownRoom(bossRoom);
-                room.addObject(new Door(this, bossRoom, "down"), 320, 376);
+                room.addObject(new Door(room, bossRoom, "down"), 320, 376);
             }
         } 
-        
-    }
+                
+    } 
     
 }

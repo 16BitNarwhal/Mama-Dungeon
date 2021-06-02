@@ -8,11 +8,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class ZombieBoss extends Boss { 
     
-    /*
+    /*pix
      * ZombieBoss constructor
      */
     public ZombieBoss(Room room, Vector2 pos) {
-        super(room, 15, 100, 1.5f, pos, 60,   80,  300,  2f, 2);
+        // room | atk|  hp |  spd | pos |dst1 |dst2|detect | wait | # phases
+        super(room, 15f, 100, 2.5f, pos, 60,   80,    300,    2f,   2);
         
         this.atkType = "melee";
         this.imgpath += "big zombie/";
@@ -21,9 +22,9 @@ public class ZombieBoss extends Boss {
         
     }
     
-    protected void phases() {
+    protected void action() {
         if (phase == 0) {
-            super.phases();
+            super.action();
         } if (phase == 1) {
             state = "idle";
             if (spawnTimer <= 0) {
@@ -31,6 +32,7 @@ public class ZombieBoss extends Boss {
                 spawnTimer = Utils.random(spawnWait*1/2, spawnWait*3/2);
                 if (room.enemies.size() < 100) { // just in case!
                     Zombie e = new Zombie(room);
+                    e.maxDetect();
                     room.enemies.add(e);
                     room.addObject(e, 0, 0);
                 }

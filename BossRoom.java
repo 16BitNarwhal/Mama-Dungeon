@@ -1,3 +1,4 @@
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
@@ -7,16 +8,36 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class BossRoom extends Room {
-
+    
+    private Boss boss;
+    private float timer;
+    
     /**
      * Constructor for objects of class BossRoom.
      */
     public BossRoom(int rad, Room left, Room right, Room up, Room down) {
         super(rad, left, right, up, down);
         
-        // debug boss room
-        addObject(new Text("BOSSSS", 50, Color.RED, Color.BLACK), Utils.worldWidth/2, Utils.worldHeight/2);
+        boss = new ZombieBoss(this, new Vector2(Utils.worldWidth/2, Utils.worldHeight/2));
+        addObject(boss, 0, 0);
         
-        addObject(new ZombieBoss(this, new Vector2(Utils.worldWidth/2, Utils.worldHeight/2)), 0, 0);
+        timer = -1;
+    }
+    
+    public void act() {
+        if (boss.isDead()) {
+            if (timer == -1) {
+                timer = 2f;
+            } else {
+                timer -= 1f / Utils.FPS;
+                timer = Math.max(timer, 0);
+                if (!boss.getRoom().getPlayer().isDead()) {
+                    if (timer == 0) {
+                        Greenfoot.setWorld(new WinWorld());
+                    }
+                }
+            }
+        }
+        
     }
 }

@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=DeathScreen
+comment0.text=\r\n\ Death\ screen\ image\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=room
+comment1.target=DeathScreen(Room)
+comment2.params=
+comment2.target=void\ act()
+numComments=3

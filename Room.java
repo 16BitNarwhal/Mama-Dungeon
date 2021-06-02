@@ -69,7 +69,7 @@ public class Room extends World {
     }
     
     public void act() {
-        setPaintOrder(Weapon.class, Enemy.class, Player.class, MoveHelp.class, AtkHelp.class);
+        setPaintOrder(GUI.class, Weapon.class, Enemy.class, Player.class, MoveHelp.class, AtkHelp.class);
     }
     
     /*

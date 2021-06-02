@@ -15,6 +15,8 @@ public class Enemy extends Entity {
     private float hurtWait, hurtTimer; // short invinicibility, hurt by player
     protected String atkType; // 'melee' or 'range'
     private static Vector2 playerOffset = new Vector2(0, 10);
+    private float idleTimer; // when player dies, start random timer for idle (for variance)
+    private float deathTimer; // time it takes to die after losing health
     
     /*
      * Enemy constructor
@@ -43,21 +45,43 @@ public class Enemy extends Entity {
         EnemyHealthBar healthBar = new EnemyHealthBar(this, "bar");
         room.addObject(healthBar, 100, 30);
         healthBar.initBasePos();
+        
+        this.idleTimer = -1;
     }
     
     public void act() {
-        movement(); 
+        if (isDead()) {
+            deathTimer -= 1f / Utils.FPS;
+            if (deathTimer <= 0) room.removeObject(this);
+            return;
+        } 
+        
+        if (!room.getPlayer().isDead()) {
+            action();
+            updateTime();
+            updatePos();
+        } else {
+            if (idleTimer == -1) {
+                idleTimer = Utils.random(1f);
+                
+            } else if (idleTimer <= 0) {
+                state = "idle";
+                
+            } else {
+                idleTimer -= 1f / Utils.FPS;
+                
+            }
+            
+        }
+        
         animate();
 
-        updateTime();
-        updatePos();
     }
     
     /*
-     * Method to move (moves within a distance of the player)
-     * Also manages attacks
+     * Manages attacks + move
      */
-    protected void movement() {
+    protected void action() {
         Player player = room.getPlayer();
         if (player.getX() > getX()) dir = 0;
         else if (player.getX() < getX()) dir = 1;
@@ -116,7 +140,7 @@ public class Enemy extends Entity {
         // only if attack is finished
         if (state == "follow") {
             atkTimer = Utils.random(0.7f*atkWait, 1.3f*atkWait);
-
+            pos = Vector2.add(pos, new Vector2(Utils.random(-5, 5), Utils.random(-5, 5)));
         }
     }
     
@@ -134,8 +158,13 @@ public class Enemy extends Entity {
     public void loseHealth(float dmg) {
         if (hurtTimer <= 0) {
             super.loseHealth(dmg);        
-            if (health <= 0) {
-                room.removeObject(this);
+            if (health <= 0 && health != -100) {
+                health = -100;
+                
+                if (dir == 0) setRotation(90);
+                else setRotation(-90);
+                
+                deathTimer = Utils.random(2f, 4f);
             }
             hurtTimer = hurtWait;
         } 
@@ -154,6 +183,11 @@ public class Enemy extends Entity {
     public void maxDetect() {
         detectRange = Utils.worldWidth + Utils.worldHeight;
     }
+    
+    /*
+     * Getter
+     */
+    public boolean isDead() { return health <= 0; }
 }
 
 /*

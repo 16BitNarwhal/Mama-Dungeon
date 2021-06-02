@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo) 
 
 /**
  * Write a description of class PlayerWeapon here.
@@ -21,9 +21,13 @@ public class PlayerWeapon extends Weapon {
     public void act() {
         super.act();
         
-        followMouse();
-        updateState();
-        handleAttack(Enemy.class);
+        if (!user.isDead()) {
+            followMouse();
+            updateState();
+            handleAttack(Enemy.class);
+        } else {
+            state = "idle";
+        }
     }
     
     private void followMouse() {        
@@ -51,4 +55,5 @@ public class PlayerWeapon extends Weapon {
             return false;
         }
     }
+    
 }

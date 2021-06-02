@@ -27,21 +27,13 @@ public class Boss extends Enemy {
         spawnWait = 2f;
     }
     
-    public void act() {
-        phases();
-        animate();
-
-        updateTime();
-        updatePos();
-    }
-    
     /*
      * Boss's attack/move cycle
      */
-    protected void phases() {
+    protected void action() {
         if (phase == 0) {
             // use enemy's standard movement
-            super.movement();
+            super.action();
         } 
     }
     

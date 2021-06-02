@@ -6,9 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Eric Zhang
  * @version (a version number or a date)
  */
-public class Player extends Entity {       
-    
-    
+public class Player extends Entity {    
     
     /*
      * Player constructors
@@ -26,24 +24,28 @@ public class Player extends Entity {
         initIdleAnim();
         initRunAnim();
         
-        PlayerHealthBar healthBg = new PlayerHealthBar(this, "bg");
-        room.addObject(healthBg, 100, 30);
-        
-        PlayerHealthBar healthBar = new PlayerHealthBar(this, "bar");
-        room.addObject(healthBar, 100, 30);
-        healthBar.initBasePos();
-        
-        weapon = new PlayerWeapon(this, 3f, 30);
-        room.addObject(weapon, 0, 0);
+        if (room != null) {
+            PlayerHealthBar healthBg = new PlayerHealthBar(this, "bg"); 
+            room.addObject(healthBg, 100, 30);
+            
+            PlayerHealthBar healthBar = new PlayerHealthBar(this, "bar");
+            room.addObject(healthBar, 100, 30);
+            healthBar.initBasePos();
+            
+            weapon = new PlayerWeapon(this, 3f, 20);
+            room.addObject(weapon, 0, 0);
+        }
     }
     
     public void act() { 
-        movement();
-        animate();
-        updatePos();
+        if (!isDead()) {
+            movement();
+            animate();
+            updatePos();
+        } 
         
         health = Math.max(health, 0); 
-    }    
+    }     
     
     /*
      * Player movement + key handling
@@ -88,9 +90,11 @@ public class Player extends Entity {
         super.loseHealth(dmg);
         room.addObject(new PlayerHurt(), Utils.worldWidth/2, Utils.worldHeight/2);
         
-        if (health <= 0) {
-            System.out.println("You dead!!!");
-            // create death world or smht
+        if (isDead()) {
+            if (dir == 0) setRotation(90);
+            else setRotation(-90);
+            
+            room.addObject(new DeathScreen(room), Utils.worldWidth/2, Utils.worldHeight);
         }
     }
     
@@ -131,6 +135,7 @@ public class Player extends Entity {
         }
         updatePos();
     }
+    
 }
 
 /*

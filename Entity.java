@@ -133,9 +133,13 @@ public class Entity extends Actor {
     public int getDir() { return this.dir; }
     public Vector2 getPos() { return this.pos; }
     
+    public boolean isDead() { return health <= 0; }
+    
     public void setAtkDmg(float dmg) { this.atkDmg = dmg; }
     public void setHealth(float hp) { this.health = hp; }
     public void setSpeed(float spd) { this.movespeed = spd; }
+    
+    public Room getRoom() { return this.room; }
     
     /*
      * Help transfer player stats from one room to another
@@ -146,5 +150,5 @@ public class Entity extends Actor {
         this.health = p.getHealth();
         this.movespeed = p.getSpeed();
         this.dir = p.getDir(); 
-    } 
+    }
 }

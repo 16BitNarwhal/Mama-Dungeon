@@ -2,144 +2,98 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 import java.util.List;
 
-// collision detection: https://www.greenfoot.org/topics/60742/0
 /**
- * Weapons for entities
+ * Floorspike class
+ * collision detection - https://www.greenfoot.org/topics/60742/0
  * 
  * @author Eric Zhang
  * @version (a version number or a date)
  */
-public class Weapon extends Actor { 
+public class FloorSpike extends Environment {
     
-    protected Entity user;
-    protected Vector2 offset, target;
-    private float atkDmg; // adds to atkDmg of entity
-    private float posDist; // posDist used to calc pos
+    private ArrayList<Vector2> allPos;
+    private Vector2 pos;
     
-    // image + animation settings
-    protected String imgpath; // subclass
-    private int frame = 0;
-    private int dir; // 1 for left, 0 for right (direction)
-    protected String state, prevState;
-    protected ArrayList<GreenfootImage>[] idleAnim, atkAnim;
-    protected boolean hurt;
+    private boolean canHurt; // spikes are out / not out
+    private boolean recentlyHurt; // spikes already hit player (per cycle)
+    
+    private int frame;
+    private ArrayList<GreenfootImage> anim; 
     
     /*
-     * Weapon constructors
+     * Floor spike constructor
      */
-    public Weapon(Entity user, float atkDmg, float dist) {
-        this.user = user;
-        this.atkDmg = atkDmg; 
-        this.posDist = dist;
-        this.offset = new Vector2(0, 10);
+    public FloorSpike() {
+        initAnim("dungeon/floor_spikes_anim_f", 5);
         
-        this.state = "idle";
-        this.hurt = false;
+        int x1 = Room.getLeftBound() + Utils.tileSize;
+        int x2 = Room.getRightBound() - Utils.tileSize;
+        int y1 = Room.getUpBound() + Utils.tileSize;
+        int y2 = Room.getDownBound() - Utils.tileSize;
+        allPos = new ArrayList<Vector2>();
+        for (int x = x1; x <= x2; x += Utils.tileSize) {
+            for (int y = y1; y <= y2; y += Utils.tileSize) {
+                allPos.add(new Vector2(x, y)); 
+            }
+        }
+        int idx = Utils.random(allPos.size()-1);
+        pos = new Vector2(allPos.get(idx).getX(), allPos.get(idx).getY());
+        
+        frame = pos.getX()/5;
     }
     
     public void act() {
+        setLocation(pos.getX(), pos.getY());
         animate();
-        if (state=="attack") attackSound(frame, 60 / 6);
+        action();
     }
-
-    protected void handleAttack(Class enemyClass) {
-        if (this.state == "attack" && this.hurt) {
-            List<Entity> enemies = getCollidingObjects(enemyClass);
-            
-            for (Entity e : enemies) {
-                float dmg = Utils.random(atkDmg*1/2, atkDmg*3/2);
-                e.loseHealth(atkDmg + user.getAtkDmg());
+    
+    /*
+     * Check player collision and attack player if touch
+     */
+    private void action() {
+        if (recentlyHurt) return;
+        
+        List<Player> lst = getCollidingObjects(Player.class);
+        if (lst.size() > 0) { 
+            Player player = lst.get(0);
+            if (!player.isDead() && canHurt) {
+                player.loseHealth(5f);
+                recentlyHurt = true;
             }
         }
+        
     }
     
-    protected void updatePos(Vector2 target) {
-        Vector2 tempOffset = offset.get();
-        if (target.getX() < getX()) {
-            tempOffset.setX(-tempOffset.getX());
+    /*
+     * Animate method
+     */
+    private void animate() {
+        // debug fr
+        int fr = 60 / 2; // framerate 
+        frame %= fr * anim.size();
+        setImage(anim.get(frame / fr));
+        if (frame / fr >= 3) {
+            canHurt = true;
+        } else {
+            canHurt = false;
+            recentlyHurt = false;
         }
-        Vector2 pos = Vector2.add(user.getPos(), tempOffset);
-        Vector2 move = Vector2.sub(target, pos);
-        
-        if (move.mag() > posDist) {
-            move = move.normalize().mult(posDist);
-        }
-        if (move.getX() > 0) {
-            dir = 0;
-        } else if (move.getX() < 0) {
-            dir = 1;
-        }
-        
-        pos = Vector2.add(pos, move);
-        setLocation(pos.getX(), pos.getY());
-    }
-    
-    protected void animate() {
-        if (state=="idle") {
-            int fr = 60 / 6; // framerate
-            frame %= fr * idleAnim[dir].size();
-            setImage(idleAnim[dir].get(frame / fr));
-            
-            hurt = false;
-        } else if (state=="attack") {
-            int fr = 60 / 6; // framerate
-            frame %= fr * atkAnim[dir].size();
-            setImage(atkAnim[dir].get(frame / fr));
-            
-            hurt = willHurt(frame, fr);
-        }
-        prevState = state;
         frame++;
     }
     
     /*
-     * Will set when attack hurts (for example downswing vs upswing)
+     * Initialize animations
      */
-    protected boolean willHurt(int frame, int fr) {
-        return true;
-    }
-    
-    /*
-     * Initialize animations 
-     */
-    protected void initIdleAnim(String file, int frameCnt) {
-        idleAnim = new ArrayList[2];
-        idleAnim[0] = new ArrayList<GreenfootImage>(); // face right
-        idleAnim[1] = new ArrayList<GreenfootImage>(); // face left
+    private void initAnim(String file, int frameCnt) {
+        anim = new ArrayList<GreenfootImage>();
         for (int f=0;f<frameCnt;f++) { // go through all frames 
-            GreenfootImage img = new GreenfootImage(imgpath+file+f+".png");
-            img.scale(img.getWidth()/5, img.getHeight()/5);
-            idleAnim[0].add(new GreenfootImage(img)); // facing right
-            img.mirrorHorizontally();
-            idleAnim[1].add(img); // facing left
+            GreenfootImage img = new GreenfootImage(file+f+".png");
+            img.scale(img.getWidth()*2, img.getHeight()*2); 
+            anim.add(img);
         }
     }
-    
-    protected void initAtkAnim(String file, int frameCnt) {
-        atkAnim = new ArrayList[2];
-        atkAnim[0] = new ArrayList<GreenfootImage>(); // face right
-        atkAnim[1] = new ArrayList<GreenfootImage>(); // face left
-        for (int f=0;f<frameCnt;f++) { // go through all frames
-            GreenfootImage img = new GreenfootImage(imgpath+file+f+".png");
-            img.scale(img.getWidth()/5, img.getHeight()/5);
-            atkAnim[0].add(new GreenfootImage(img)); // facing right 
-            img.mirrorHorizontally(); // facing left
-            atkAnim[1].add(img);
-        }
-    } 
-    
-    /*
-     * Play attack sound (override in subclasses)
-     */
-    protected void attackSound(int frame, int fr) { }
-    
-    /*
-     * Getters & Setters
-     */
-    public boolean isAttacking() { return state=="attack"; }
-    
-    protected void setOffset(Vector2 offset) { this.offset = offset; } 
-    
+
     /*
      * Totally my code
      * just kidding - https://www.greenfoot.org/topics/60742/0

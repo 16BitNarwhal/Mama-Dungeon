@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=FloorSpike
+comment0.text=\r\n\ Floorspike\ class\r\n\ collision\ detection\ -\ https\://www.greenfoot.org/topics/60742/0\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=FloorSpike()
+comment1.text=\r\n\ Floor\ spike\ constructor\r\n
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ action()
+comment3.text=\r\n\ Check\ player\ collision\ and\ attack\ player\ if\ touch\r\n
+comment4.params=
+comment4.target=void\ animate()
+comment4.text=\r\n\ Animate\ method\r\n
+comment5.params=file\ frameCnt
+comment5.target=void\ initAnim(java.lang.String,\ int)
+comment5.text=\r\n\ Initialize\ animations\r\n
+comment6.params=cls
+comment6.target=java.util.List\ getCollidingObjects(java.lang.Class)
+comment6.text=\r\n\ Totally\ my\ code\r\n\ just\ kidding\ -\ https\://www.greenfoot.org/topics/60742/0\r\n
+comment7.params=atr\ bitmask
+comment7.target=boolean\ isCollidedWith(greenfoot.Actor,\ boolean[][])
+numComments=8

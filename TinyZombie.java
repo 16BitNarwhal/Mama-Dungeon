@@ -12,13 +12,13 @@ public class TinyZombie extends Enemy {
      * TinyZombie  constructors
      */
     public TinyZombie (Room room) {
-        this(room, new Vector2(Utils.random(room.getLeftBound(), room.getRightBound()),
-                Utils.random(room.getUpBound(), room.getDownBound())));
+        this(room, new Vector2(Utils.random(Room.getLeftBound(), Room.getRightBound()),
+                Utils.random(Room.getUpBound(), Room.getDownBound())));
     }
     
     public TinyZombie (Room room, Vector2 pos) {
         // room | atk|hp|spd| pos |dst1 |dst2|detect | wait
-        this(room, 2f, 10, 2.5f, pos, 30,  40,  150,  1f);
+        this(room, 2f, 15, 3.5f, pos, 60,  70,  150,  1f);
     }
     
     public TinyZombie (Room room, float atkDmg, float health, float movespeed, Vector2 pos, 

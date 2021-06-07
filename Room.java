@@ -15,7 +15,7 @@ public class Room extends World {
     private Player player;
     private int id; // identity of room
     protected Room leftRoom, rightRoom, upRoom, downRoom; // neighbouring rooms
-    private int x1, x2, y1, y2; // room boundaries
+    private static int x1, x2, y1, y2; // room boundaries
     
     protected ArrayList<Enemy> enemies;
     
@@ -71,7 +71,7 @@ public class Room extends World {
     }
     
     public void act() {
-        setPaintOrder(GUI.class, Weapon.class, Enemy.class, Player.class, MoveHelp.class, AtkHelp.class);
+        setPaintOrder(GUI.class, Weapon.class, HealthPotion.class, Coin.class, Enemy.class, Player.class, MoveHelp.class, AtkHelp.class, FloorSpike.class);
     }
     
     /*
@@ -110,13 +110,16 @@ public class Room extends World {
      */
     private Room newRoom(Room a, Room b, Room c, Room d) {
         // init probabilites here
-        float enemy = 1; 
+        float enemy = 1;
+        float trap = enemy + 1;
         
         float empty = enemy + 1;
         
         float prob = Utils.random();
         if (prob <= enemy / empty) {
             return new EnemyRoom(rad+1, a, b, c, d);
+        } else if (prob <= trap / empty) {
+            return new TrapRoom(rad+1, a, b, c, d);
         }
         
         return new Room(rad+1, a, b, c, d);
@@ -207,10 +210,10 @@ public class Room extends World {
     }
     public int getRad() { return this.rad; }
     
-    public int getLeftBound() { return this.x1; }
-    public int getRightBound() { return this.x2; }
-    public int getUpBound() { return this.y1; }
-    public int getDownBound() { return this.y2; }
+    public static int getLeftBound() { return x1; }
+    public static int getRightBound() { return x2; }
+    public static int getUpBound() { return y1; }
+    public static int getDownBound() { return y2; }
 
     public Room getLeftRoom() { return leftRoom; }
     public Room getRightRoom() { return rightRoom; }

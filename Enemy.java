@@ -52,7 +52,10 @@ public class Enemy extends Entity {
     public void act() {
         if (isDead()) {
             deathTimer -= 1f / Utils.FPS;
-            if (deathTimer <= 0) room.removeObject(this);
+            if (deathTimer <= 0) {
+                dropItem();
+                room.removeObject(this);
+            }
             return;
         } 
         
@@ -76,6 +79,24 @@ public class Enemy extends Entity {
         
         animate();
 
+    }
+    
+    /*
+     * Drop random item on death
+     */
+    protected void dropItem() {
+        float healthPot = 2;
+        float coin = healthPot + 5;
+        
+        float none = coin + 5;
+        float prob = Utils.random();
+        if (prob <= healthPot / none) {
+            room.addObject(new HealthPotion(), pos.getX(), pos.getY());
+        } else if (prob <= coin / none) {
+            room.addObject(new Coin(), pos.getX(), pos.getY());
+        } else {
+            // oh nose! enemy didn't drop anything
+        }
     }
     
     /*

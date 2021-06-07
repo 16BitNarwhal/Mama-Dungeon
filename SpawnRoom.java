@@ -20,7 +20,11 @@ public class SpawnRoom extends Room {
         
         addObject(new MoveHelp(), 170, 280);
         addObject(new AtkHelp(), 470, 290);
-
+        
+        if (!themeSong.isPlaying()) {
+            themeSong.setVolume(30);
+            themeSong.playLoop();
+        }
     }
     
     /*

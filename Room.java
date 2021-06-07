@@ -19,6 +19,8 @@ public class Room extends World {
     
     protected ArrayList<Enemy> enemies;
     
+    public static GreenfootSound themeSong = new GreenfootSound("main_theme.wav");
+    
     /**
      * Construct room with no given neighbours
      */ 
@@ -108,11 +110,12 @@ public class Room extends World {
      */
     private Room newRoom(Room a, Room b, Room c, Room d) {
         // init probabilites here
-        float enemy = 1; // 3
+        float enemy = 1; 
         
-        float empty = 1 + enemy;
+        float empty = enemy + 1;
         
-        if (Utils.random() <= enemy / empty) {
+        float prob = Utils.random();
+        if (prob <= enemy / empty) {
             return new EnemyRoom(rad+1, a, b, c, d);
         }
         

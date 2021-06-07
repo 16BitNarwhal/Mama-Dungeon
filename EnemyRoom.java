@@ -1,3 +1,4 @@
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
@@ -16,11 +17,12 @@ public class EnemyRoom extends Room {
             
         int numEnemies = Utils.random(3, 6);
         for (int i=0;i<numEnemies;i++) {
-            Zombie zombie = new Zombie(this);
-            enemies.add(zombie);
-            addObject(zombie, 0, 0);
-        }
-        
+            Enemy e = Utils.newEnemy(this);
+            enemies.add(e);
+            addObject(e, 0, 0);
+        } 
     }
+    
+
     
 }

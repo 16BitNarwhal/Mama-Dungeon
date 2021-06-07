@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class ZombieBoss extends Boss { 
     
-    /*pix
+    /*
      * ZombieBoss constructor
      */
     public ZombieBoss(Room room, Vector2 pos) {
@@ -31,7 +31,7 @@ public class ZombieBoss extends Boss {
                 System.out.println("spawn");
                 spawnTimer = Utils.random(spawnWait*1/2, spawnWait*3/2);
                 if (room.enemies.size() < 100) { // just in case!
-                    Zombie e = new Zombie(room);
+                    Enemy e = Utils.newEnemy(room);
                     e.maxDetect();
                     room.enemies.add(e);
                     room.addObject(e, 0, 0);

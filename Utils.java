@@ -12,7 +12,28 @@ public class Utils {
         worldWidth = 640,
         worldHeight = 416;
     public static int FPS = 60;
+    
+    /*
+     * Method for choosing new enemy to spawn (for boss and enemy rooms)
+     */
+    public static Enemy newEnemy(Room room) {
+        float zombie = 3;
+        float tinyZombie = zombie + 3;
+        float skelet = tinyZombie + 3;
         
+        float total = skelet;
+        
+        float prob = Utils.random();
+        if (prob <= zombie / total) {
+            return new Zombie(room);
+        } else if (prob <= tinyZombie / total) {
+            return new TinyZombie(room);
+        } else if (prob <= skelet / total) {
+            return new Skelet(room);
+        }
+        return null;
+    }
+    
     /*
      * Method to help place objects at good position
      */

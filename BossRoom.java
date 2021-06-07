@@ -30,14 +30,18 @@ public class BossRoom extends Room {
                 timer = 2f;
             } else {
                 timer -= 1f / Utils.FPS;
-                timer = Math.max(timer, 0);
-                if (!boss.getRoom().getPlayer().isDead()) {
-                    if (timer == 0) {
-                        Greenfoot.setWorld(new WinWorld());
-                    }
+                timer = Math.max(timer, 0); 
+                if (timer == 0) {
+                    themeSong.stop();
+                    Greenfoot.setWorld(new WinWorld());
                 }
             }
         }
         
     }
+    
+    /*
+     * Getter
+     */
+    public boolean deadBoss() { return this.boss.isDead(); }
 }

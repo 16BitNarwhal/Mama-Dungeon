@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Skelet
+comment0.text=\r\n\ Skelet\ Enemy\r\n\ \r\n\ @author\ Eric\ Zhang\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=room
+comment1.target=Skelet(Room)
+comment1.text=\r\n\ Zombie\ constructors\r\n
+comment2.params=room\ pos
+comment2.target=Skelet(Room,\ Vector2)
+comment3.params=room\ atkDmg\ health\ movespeed\ pos\ distClose\ distFar\ detectRange\ waitTime
+comment3.target=Skelet(Room,\ float,\ float,\ float,\ Vector2,\ float,\ float,\ float,\ float)
+numComments=4

@@ -39,7 +39,7 @@ public class Weapon extends Actor {
     
     public void act() {
         animate();
-        
+        if (state=="attack") attackSound(frame, 60 / 6);
     }
 
     protected void handleAttack(Class enemyClass) {
@@ -127,6 +127,11 @@ public class Weapon extends Actor {
             atkAnim[1].add(img);
         }
     } 
+    
+    /*
+     * Play attack sound (override in subclasses)
+     */
+    protected void attackSound(int frame, int fr) { }
     
     /*
      * Getters & Setters

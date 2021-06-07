@@ -11,6 +11,7 @@ public class DeathScreen extends GUI {
     private int t; // transparency
     private Room room;
     private boolean finished;
+    private GreenfootSound loseSound = new GreenfootSound("mixkit-player-losing-or-failing-2042.wav");
     
     public DeathScreen(Room room) {
         GreenfootImage image = new GreenfootImage("DeathScreen.png"); 
@@ -19,6 +20,9 @@ public class DeathScreen extends GUI {
         this.room = room;
         finished = false;
         t = 0;
+        
+        room.themeSong.stop();
+        loseSound.play();
     }
     
     public void act() {

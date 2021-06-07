@@ -8,6 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Player extends Entity {    
     
+    private GreenfootSound walkSound = new GreenfootSound("walking-sound.wav");                           
+    
     /*
      * Player constructors
      */    
@@ -78,8 +80,10 @@ public class Player extends Entity {
         
         if (up || down || left || right) {
             state = "run";
+            if (!walkSound.isPlaying()) walkSound.play();
         } else {
             state = "idle";
+            walkSound.stop();
         }
     } 
     
@@ -94,7 +98,11 @@ public class Player extends Entity {
             if (dir == 0) setRotation(90);
             else setRotation(-90);
             
-            room.addObject(new DeathScreen(room), Utils.worldWidth/2, Utils.worldHeight);
+            if (!((room instanceof BossRoom) && ((BossRoom)room).deadBoss())) {
+                room.addObject(new DeathScreen(room), Utils.worldWidth/2, Utils.worldHeight);
+            } else {
+                System.out.println("huh");
+            }
         }
     }
     
@@ -137,12 +145,3 @@ public class Player extends Entity {
     }
     
 }
-
-/*
- * Todo:
- * Attack and kill enemies
- * 
- * Idea:
- * invincibility when hit by enemy / entering rooms
- * 
- */

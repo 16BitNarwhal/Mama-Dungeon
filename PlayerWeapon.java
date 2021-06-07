@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class PlayerWeapon extends Weapon { 
     
     private boolean mouseDown = false;
+    private GreenfootSound atkSound = new GreenfootSound("swooosh.wav");
     
     public PlayerWeapon(Player user, float atkDmg, float dist) {
         super(user, atkDmg, dist);
@@ -16,6 +17,8 @@ public class PlayerWeapon extends Weapon {
         this.imgpath = "weapon/regular_sword/";
         initIdleAnim("weapon_regular_sword", 1);
         initAtkAnim("weapon_regular_sword_attack", 4);
+        
+        atkSound.setVolume(75);
     }
     
     public void act() {
@@ -29,7 +32,7 @@ public class PlayerWeapon extends Weapon {
             state = "idle";
         }
     }
-    
+     
     private void followMouse() {        
         MouseInfo mouse = Greenfoot.getMouseInfo();
         if (mouse != null) {
@@ -40,19 +43,34 @@ public class PlayerWeapon extends Weapon {
         updatePos(new Vector2(target.getX(), target.getY()));
     }
     
+    /*
+     * Mouse detect to attack / not attack
+     */
     private void updateState() {        
         if (Greenfoot.mousePressed(null)) {
-            this.state = "attack";
+            this.state = "attack"; 
         } else if (Greenfoot.mouseClicked(null)) {
             this.state = "idle";
         }
     }
     
+    /*
+     * Sets when sword can deal damage based on animation
+     */
     protected boolean willHurt(int frame, int fr) { 
         if (frame/fr > 0 && frame/fr < atkAnim[0].size() - 1) {
             return true;
         } else {
             return false;
+        }
+    }
+    
+    /*
+     * Play attack sound
+     */
+    protected void attackSound(int frame, int fr) {
+        if (frame/fr == 1) {
+            atkSound.play();
         }
     }
     

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Zombie
-comment0.text=\r\n\ Zombie\ Enemy\r\n\ \r\n\ @author\ Eric\ Zhang\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Zombie\:\ med\ speed,\ med\ health,\ med\ dmg\r\n\ \r\n\ @author\ Eric\ Zhang\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=room
 comment1.target=Zombie(Room)
 comment1.text=\r\n\ Zombie\ constructors\r\n

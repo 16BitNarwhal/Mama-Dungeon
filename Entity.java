@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 
 /**
- * Entity / character class
+ * General entity / character class
  * 
  * @author Eric Zhang
  * @version (a version number or a date)

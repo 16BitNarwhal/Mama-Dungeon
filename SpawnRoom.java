@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 
 /**
- * Room that player spawns in
+ * Room that player spawns/starts in
  * 
  * @author Eric Zhang
  * @version (a version number or a date)
@@ -31,6 +31,7 @@ public class SpawnRoom extends Room {
      * initialize boss/end room
      */
     private void initBossRoom() { 
+        // find rooms with 1 neighbour (dead end)
         ArrayList<Room> endRooms = new ArrayList<Room>();
         for (Room room : Room.rooms) {
             if (room.getID() != 1 && room.getNeighbours() == 1) {
@@ -38,11 +39,10 @@ public class SpawnRoom extends Room {
             }
         }
         
+        // add boss room as neighbour of dead end
         int idx = Utils.random(endRooms.size() - 1);
         Room room = endRooms.get(idx);
         Room bossRoom = null;
-        // debug
-        System.out.println("Room by boss room: " + room.getID());
         while (bossRoom == null) {
             float x = Utils.random();
             if (x <= 0.25f && room.getLeftRoom() == null) {

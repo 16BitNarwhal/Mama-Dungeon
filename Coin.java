@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Coin extends Item {
     
-    float addedDmg;
+    private float addedDmg;
     
     public Coin() {
         super();
@@ -19,8 +19,9 @@ public class Coin extends Item {
     protected void onCollect(Player player) {
         super.onCollect(player);
         float dmg = Math.min(player.getAtkDmg() + addedDmg, 100f);
-        System.out.println("Set " + dmg + " dmg to player"); // debug
+        // System.out.println("Set " + dmg + " dmg to player"); // debug
         player.setAtkDmg(dmg);
+        Player.coins++;
     }
     
 }

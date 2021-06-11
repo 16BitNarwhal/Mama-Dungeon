@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Healthbar for player
+ * Healthbar for player in top left
  * 
  * @author Eric Zhang
  * @version (a version number or a date)

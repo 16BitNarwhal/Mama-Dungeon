@@ -60,7 +60,7 @@ public class Room extends World {
         initDoors();
         
         // debug room id
-        addObject(new Text(String.valueOf(this.id), 50, Color.RED, Color.BLACK), 100, 100);
+        // addObject(new Text(String.valueOf(this.id), 50, Color.RED, Color.BLACK), 100, 100);
         
         // create player
         player = new Player(this);
@@ -180,7 +180,7 @@ public class Room extends World {
     }
     
     /*
-     * Reset / clear any existing rooms for 'new game'
+     * Reset / clear any existing room references for 'new game'
      */
     public static void resetRooms() { 
         for (Room room : rooms) {

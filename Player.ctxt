@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Player
-comment0.text=\r\n\ Player\ script\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Player\ moves\ around,\ fights\ enemies\ and\ bosses,\ collects\ items\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=room
 comment1.target=Player(Room)
 comment1.text=\r\n\ Player\ constructors\r\n

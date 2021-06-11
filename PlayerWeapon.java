@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo) 
 
 /**
- * Write a description of class PlayerWeapon here.
+ * Player weapon that only hurts enemies and boss
  * 
  * @author Eric Zhang
  * @version (a version number or a date)

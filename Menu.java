@@ -43,9 +43,6 @@ public class Menu extends World {
     private void setGUI() {
         addObject(new Title(), 320, 144);  
         addObject(new StartButton(), 320, 260); 
-        // addObject(new MoveHelp(), 166, 265); 
-        // addObject(new AtkHelp(), 437, 265);
-         
     }
 
 }

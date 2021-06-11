@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=WinWorld
-comment0.text=\r\n\ When\ player\ wins,\ this\ world\ will\ be\ an\ 'animation'\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ When\ player\ wins,\ this\ world\ play\ like\ an\ 'animation'\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=WinWorld()
 numComments=2

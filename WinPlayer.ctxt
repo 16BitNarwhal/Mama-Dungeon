@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=WinPlayer
-comment0.text=\r\n\ Player\ in\ Win\ World\ animation\ thing\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Non-controllable\ player\ for\ Win\ World\ animation\ \r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=WinPlayer()
 comment2.params=

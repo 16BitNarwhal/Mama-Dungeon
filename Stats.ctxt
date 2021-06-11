@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=Stats
+comment0.text=\r\n\ Show\ player\ stats\ at\ end\ of\ game\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=world
+comment1.target=Stats(greenfoot.World)
+comment2.params=
+comment2.target=void\ act()
+comment3.params=text\ x\ y
+comment3.target=void\ addText(java.lang.String,\ int,\ int)
+comment4.params=
+comment4.target=boolean\ isShown()
+comment5.params=
+comment5.target=void\ flipShown()
+numComments=6

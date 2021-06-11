@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * When player wins, this world will be an 'animation'
+ * When player wins, this world play like an 'animation'
  * 
  * @author Eric Zhang
  * @version (a version number or a date)
@@ -16,5 +16,7 @@ public class WinWorld extends World {
         addObject(new WinPlayer(), 500, 350);
         
         winSong.play();
+        
+        setPaintOrder(Text.class);
     }
 }

@@ -2,9 +2,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 import java.util.List;
 
-// collision detection: https://www.greenfoot.org/topics/60742/0
 /**
  * Weapons for entities
+ * collision detection: https://www.greenfoot.org/topics/60742/0
  * 
  * @author Eric Zhang
  * @version (a version number or a date)

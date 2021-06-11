@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=TrapRoom
-comment0.text=\r\n\ Room\ with\ lotsa\ traps\ and\ spikes\ and\ stuff\ \r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Room\ with\ lots\ of\ spikes\ and\ items\ \r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=rad\ l\ r\ u\ d
 comment1.target=TrapRoom(int,\ Room,\ Room,\ Room,\ Room)
 comment1.text=\r\n\ Construct\ TrapRoom\r\n

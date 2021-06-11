@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Boss
-comment0.text=\r\n\ Boss\ class\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Boss\ fights\ player\ and\ creates\ WinWorld\ when\ defeated\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=room\ atkDmg\ health\ movespeed\ pos\ distClose\ distFar\ detectRange\ atkWait\ maxPhases
 comment1.target=Boss(Room,\ float,\ float,\ float,\ Vector2,\ float,\ float,\ float,\ float,\ int)
 comment1.text=\r\n\ Boss\ constructor\r\n

@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Tiny Zombie Enemy
+ * Tiny Zombie: fast, med health, low dmg
  * 
  * @author Eric Zhang 
  * @version (a version number or a date)

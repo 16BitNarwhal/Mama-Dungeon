@@ -13,4 +13,7 @@ public class Text extends GUI {
         setImage(img);
     }
     
+    public Text(String text, int size, Color fcolor) {
+        this(text, size, fcolor, null);
+    }
 }

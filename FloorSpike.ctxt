@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=FloorSpike
-comment0.text=\r\n\ Floorspike\ class\r\n\ collision\ detection\ -\ https\://www.greenfoot.org/topics/60742/0\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Floorspike\ that\ damages\ player\ when\ touched\r\n\ collision\ detection\ -\ https\://www.greenfoot.org/topics/60742/0\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=FloorSpike()
 comment1.text=\r\n\ Floor\ spike\ constructor\r\n

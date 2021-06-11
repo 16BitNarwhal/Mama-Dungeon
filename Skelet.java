@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Skelet Enemy
+ * Skelet: slow, low health, very strong dmg
  * 
  * @author Eric Zhang 
  * @version (a version number or a date)
@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Skelet extends Enemy {
     
     /*
-     * Zombie constructors
+     * Skelet constructors
      */
     public Skelet(Room room) {
         this(room, new Vector2(Utils.random(room.getLeftBound(), room.getRightBound()),

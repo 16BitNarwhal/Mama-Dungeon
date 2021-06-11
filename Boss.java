@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 
 /**
- * Boss class
+ * Boss fights player and creates WinWorld when defeated
  * 
  * @author Eric Zhang
  * @version (a version number or a date)

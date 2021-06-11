@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Item
-comment0.text=\r\n\ Item\ class\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Item\ that\ can\ be\ picked\ up\ by\ player\ and\ provides\ some\ kind\ of\ stat\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=Item()
 comment2.params=

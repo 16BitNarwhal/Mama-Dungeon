@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Player script
+ * Player moves around, fights enemies and bosses, collects items
  * 
  * @author Eric Zhang
  * @version (a version number or a date)
@@ -9,6 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Player extends Entity {    
     
     private GreenfootSound walkSound = new GreenfootSound("walking-sound.wav");                           
+    public static int kills=0, coins=0, healthPots=0; // player stats
+    public static float totalTime=0;
     
     /*
      * Player constructors
@@ -45,7 +47,7 @@ public class Player extends Entity {
             animate();
             updatePos();
         } 
-        
+        totalTime += 1f / Utils.FPS;
         health = Math.max(health, 0); 
     }     
     
@@ -100,9 +102,7 @@ public class Player extends Entity {
             
             if (!((room instanceof BossRoom) && ((BossRoom)room).deadBoss())) {
                 room.addObject(new DeathScreen(room), Utils.worldWidth/2, Utils.worldHeight);
-            } else {
-                System.out.println("huh");
-            }
+            } 
         }
     }
     

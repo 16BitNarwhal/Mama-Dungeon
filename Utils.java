@@ -35,7 +35,7 @@ public class Utils {
     }
     
     /*
-     * Method to help place objects at good position
+     * Method to locate objects (for debugging)
      */
     public static void locate(Actor a) {
         System.out.print(a);

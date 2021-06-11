@@ -2,7 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 
 /**
- * Item class
+ * Item that can be picked up by player and provides some kind of stat
  * 
  * @author Eric Zhang
  * @version (a version number or a date)

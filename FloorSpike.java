@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Floorspike class
+ * Floorspike that damages player when touched
  * collision detection - https://www.greenfoot.org/topics/60742/0
  * 
  * @author Eric Zhang

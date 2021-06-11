@@ -27,8 +27,7 @@ public class ZombieBoss extends Boss {
             super.action();
         } if (phase == 1) {
             state = "idle";
-            if (spawnTimer <= 0) {
-                System.out.println("spawn");
+            if (spawnTimer <= 0) { 
                 spawnTimer = Utils.random(spawnWait*1/2, spawnWait*3/2);
                 if (room.enemies.size() < 100) { // just in case!
                     Enemy e = Utils.newEnemy(room);

@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Weapon
-comment0.text=\r\n\ Weapons\ for\ entities\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Weapons\ for\ entities\r\n\ collision\ detection\:\ https\://www.greenfoot.org/topics/60742/0\r\n\ \r\n\ @author\ Eric\ Zhang\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=user\ atkDmg\ dist
 comment1.target=Weapon(Entity,\ float,\ float)
 comment1.text=\r\n\ Weapon\ constructors\r\n

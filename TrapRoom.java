@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Room with lotsa traps and spikes and stuff 
+ * Room with lots of spikes and items 
  * 
  * @author Eric Zhang
  * @version (a version number or a date)
@@ -14,11 +14,13 @@ public class TrapRoom extends Room {
     public TrapRoom(int rad, Room l, Room r, Room u, Room d) {
         super(rad, l, r, u, d);
         
+        // init floor spikes
         int numTraps = Utils.random(25, 35);
         for (int i=0;i<numTraps;i++) {
             addObject(new FloorSpike(),0,0);
         }
         
+        // init health potions
         int numHealthPots = Utils.random(1, 2);
         for (int i=0;i<numHealthPots;i++) {
             Vector2 pos = new Vector2(
@@ -28,6 +30,7 @@ public class TrapRoom extends Room {
                 addObject(new HealthPotion(), pos.getX(), pos.getY());
         }
         
+        // init coins
         int numCoins = Utils.random(2, 4);
         for (int i=0;i<numCoins;i++) {
             Vector2 pos = new Vector2(

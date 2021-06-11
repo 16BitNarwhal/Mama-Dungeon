@@ -64,5 +64,5 @@ comment8.params=
 comment8.target=void\ setWalls()
 comment9.params=
 comment9.target=void\ resetRooms()
-comment9.text=\r\n\ Reset\ /\ clear\ any\ existing\ rooms\ for\ 'new\ game'\r\n
+comment9.text=\r\n\ Reset\ /\ clear\ any\ existing\ room\ references\ for\ 'new\ game'\r\n
 numComments=29

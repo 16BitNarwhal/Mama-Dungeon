@@ -1,5 +1,5 @@
 /**
- * 2D Vector
+ * 2D Vector of the form (x,y)
  * 
  * @author Eric Zhang
  * @version (a version number or a date)

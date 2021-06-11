@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Zombie Enemy
+ * Zombie: med speed, med health, med dmg
  * 
  * @author Eric Zhang 
  * @version (a version number or a date)

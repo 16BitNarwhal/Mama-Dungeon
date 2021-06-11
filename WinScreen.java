@@ -16,7 +16,7 @@ public class WinScreen extends GUI {
         setImage(image);
         
         finished = false;
-        t = 0;
+        t = 0; 
     }
     
     public void act() {
@@ -28,6 +28,9 @@ public class WinScreen extends GUI {
             getImage().setTransparency(t);
         } else if (!finished) {
             getWorld().addObject(new ExitButton(), 600, 376);
+            Stats st = new Stats(getWorld());
+            getWorld().addObject(st, 0, 0);
+            getWorld().addObject(new StatsButton(st), 530, 376);
             finished = true;
         }
         

@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Create a door
+ * Door to move between 2 rooms
  * 
  * @author Eric Zhang
  * @version (a version number or a date)

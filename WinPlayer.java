@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Player in Win World animation thing
+ * Non-controllable player for Win World animation 
  * 
  * @author Eric Zhang
  * @version (a version number or a date)

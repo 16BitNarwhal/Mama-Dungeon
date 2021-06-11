@@ -54,6 +54,7 @@ public class Enemy extends Entity {
             deathTimer -= 1f / Utils.FPS;
             if (deathTimer <= 0) {
                 dropItem();
+                Player.kills++;
                 room.removeObject(this);
             }
             return;
@@ -154,6 +155,7 @@ public class Enemy extends Entity {
             }
         } else if (atkType=="shoot") {
             // spawn projectile
+            System.out.println("Shooting enemies don't exist yet :/");
         } else {
             System.out.println(this + " | Attack type not specified");
         }
@@ -185,7 +187,7 @@ public class Enemy extends Entity {
                 if (dir == 0) setRotation(90);
                 else setRotation(-90);
                 
-                deathTimer = Utils.random(2f, 4f);
+                deathTimer = Utils.random(1f, 3f);
             }
             hurtTimer = hurtWait;
         } 
